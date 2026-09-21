@@ -1,9 +1,5 @@
 /**
  * Centralized links & constants.
- *
- * ဒီ file ထဲက constant တွေကို ကိုယ်ပြောင်းရင် အကုန်လုံးက
- * တစ်နေရာတည်းကနေ အလုပ်ဖြစ်သွားမှာဖြစ်လို့
- * project တစ်ဝှမ်းက link တွေကို ဒီကနေပဲ ထိန်းချုပ်နိုင်မယ်။
  */
 
 // ---- Website ----
@@ -28,7 +24,7 @@ export const TELEGRAM_URL = 'https://t.me/KYZH8'
 // ---- Location ----
 export const LOCATION = 'Yangon, Myanmar'
 
-// ---- Placeholder (for not-yet-available links) ----
+// ---- Placeholder ----
 export const PLACEHOLDER_LINK = '#'
 
 // ---- Section meta (navigation + section anchors) ----
