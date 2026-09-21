@@ -1,8 +1,5 @@
 /**
- * Content data — components တွေမှာ ထည့်မဆောက်တော့ဘဲ
- * ဒီ file ကနေပဲ array/data တွေကို ထိန်းချုပ်နိုင်အောင် စုထားတယ်။
- *
- * Links/URL တွေအတွက်ကတော့ src/lib/constants.ts မှာရှိတယ်။
+ * Content data
  */
 import {
   MOBILE_APP_IMAGE_URL,
