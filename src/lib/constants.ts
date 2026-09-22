@@ -32,10 +32,9 @@ export const SECTIONS = [
   { id: 'about', label: 'About' },
   { id: 'skills', label: 'Skills' },
   { id: 'work', label: 'Work' },
-  { id: 'certifications', label: 'Certifications' },
   { id: 'education', label: 'Education' },
-  { id: 'writing', label: 'Writing' },
-  { id: 'speaking', label: 'Speaking' },
+  // { id: 'writing', label: 'Writing' },
+  // { id: 'speaking', label: 'Speaking' },
   { id: 'contact', label: 'Contact'}
 ] as const
 

@@ -162,6 +162,44 @@ export const PROJECTS: Project[] = [
 
 export const PROJECT_FILTERS = ['All', 'Web', 'Mobile', 'Desktop'] as const
 export type ProjectFilter = (typeof PROJECT_FILTERS)[number]
+
+// ---- Education ----
+export type EducationItem = {
+  num: string
+  school: string
+  title: string
+  period: string
+  location: string
+  body: string
+}
+
+export const EDUCATION: EducationItem[] = [
+  {
+    num: '01',
+    school: 'University of Computer Studies, Yangon (UCSY)',
+    title: 'Computer Science',
+    period: 'Foundation',
+    location: 'Yangon, Myanmar',
+    body: 'My journey in computer science began here, driven by a passion for practical engineering — programming, algorithms, and software development.',
+  },
+  {
+    num: '02',
+    school: 'MST College',
+    title: 'ITPEC Pathway — IP & FE',
+    period: '2024 — 2025',
+    location: 'Myanmar',
+    body: 'Studied Japan\'s ITPEC programs at MST College and passed the Fundamental Information Technology Engineer (FE) examination in April 2025.',
+  },
+  {
+    num: '03',
+    school: 'On-the-Job Training',
+    title: 'Employee Management System',
+    period: '2025',
+    location: 'MST College Training',
+    body: 'Built an Employee Management System with pure PHP during OJT, focused on real-world problems and practical engineering skills.',
+  },
+]
+
 // ---- Certifications ----
 export type Certification = {
   title: string

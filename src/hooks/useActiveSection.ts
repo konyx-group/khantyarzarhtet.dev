@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-const sections = ['about', 'skills', 'work', 'github', 'testimonials', 'certifications', 'education', 'writing', 'speaking', 'contact']
+const sections = ['about', 'skills', 'work', 'github', 'testimonials', 'education', 'writing', 'speaking', 'contact']
 
 /**
  * Determines which section is currently "active" (shown in the page nav).

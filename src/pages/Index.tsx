@@ -8,7 +8,6 @@ import { Skills } from '@/components/Skills'
 import { Work } from '@/components/Work'
 import { GitHub } from '@/components/GitHub'
 import { Testimonials } from '@/components/Testimonials'
-import { Certifications } from '@/components/Certifications'
 import { Education } from '@/components/Education'
 import { Writing } from '@/components/Writing'
 import { Speaking } from '@/components/Speaking'
@@ -28,10 +27,9 @@ export default function Index() {
         <Work />
         {/* <GitHub />
         <Testimonials /> */}
-        <Certifications />
         <Education />
-        <Writing />
-        <Speaking />
+        {/* <Writing />
+        <Speaking /> */}
         <Contact />
       </main>
     </div>
