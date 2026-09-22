@@ -3,10 +3,13 @@
  */
 import {
   MOBILE_APP_IMAGE_URL,
-  INDEPENDENT_IMAGE_URL,
   EMS_IMAGE_URL,
   POS_IMAGE_URL,
   WORK_IMAGE_URL,
+  MUSIC_APP_IMAGE_URL,
+  VOTING_APP_IMAGE_URL,
+  TRIP_APP_IMAGE_URL,
+  SHOP_APP_IMAGE_URL,
   PLACEHOLDER_LINK,
   LOCATION,
 } from './constants'
@@ -91,12 +94,15 @@ export const STATS = [
 export type ProjectCategory = 'Web' | 'Mobile' | 'Desktop'
 
 export type Project = {
+  num: string
   title: string
   company: string
+  role: string
   location: string
   period: string
   description: string
   details: string
+  highlights: string[]
   skills: string[]
   category: ProjectCategory
   image: string
@@ -104,57 +110,162 @@ export type Project = {
 
 export const PROJECTS: Project[] = [
   {
-    title: 'PHP Laravel Developer',
-    company: 'Current Professional Role',
+    num: '01',
+    title: 'E-Learning Platform',
+    company: 'Professional Role',
+    role: 'PHP Laravel Developer',
     location: LOCATION,
     period: '2026 — Present',
-    description: 'Developing and maintaining a scalable E-Learning Platform. Previously built dynamic web applications including a Music Web App and a Voting Web App. Focused on robust backend architecture, database optimization, and writing clean, maintainable code.',
-    details: 'Working full-time on a production E-Learning Platform, handling course management, user authentication, payment integration, and content delivery. Built a Music Web App with streaming features and a Voting Web App with real-time results. Deeply focused on writing clean, testable code and optimizing MySQL queries for performance at scale.',
-    skills: ['Laravel', 'PHP', 'MySQL', 'Web Apps', 'Backend Architecture'],
+    description:
+      'Production learning platform with courses, auth, payments, and content delivery — built for scale and clean maintainability.',
+    details:
+      'Full-time work on a production E-Learning Platform: course management, user authentication, payment flows, and content delivery. Focused on robust Laravel architecture, MySQL performance, and code that stays readable as the product grows.',
+    highlights: [
+      'Course & enrollment management',
+      'Auth + payment integration',
+      'MySQL query optimization',
+    ],
+    skills: ['Laravel', 'PHP', 'MySQL', 'Auth', 'Payments'],
     category: 'Web',
     image: WORK_IMAGE_URL,
   },
-{
-    title: 'Mobile App Developer',
+  {
+    num: '02',
+    title: 'Music Web App',
     company: 'Professional Role',
+    role: 'Full-Stack Developer',
     location: LOCATION,
-    period: 'Late 2025 — 2026',
-    description: 'Worked in a fast-paced environment developing multiple cross-platform mobile applications over a 6-month period. Successfully shipped diverse apps including School Management, Trip App, Shop App, Property App, Learning App, and Car App. Integrated Firebase for real-time data sync and backend services.',
-    details: 'Shipped 6+ production mobile apps across different industries in just 6 months. Built a School Management App with attendance and grade tracking, a Trip App with booking flows, a Shop App with cart and checkout, a Property App with listings, a Learning App with course content, and a Car App with vehicle management. Used Firebase for real-time sync, push notifications, and cloud storage.',
-    skills: ['React Native', 'Firebase', 'Mobile Development', 'UI/UX', 'API Integration'],
+    period: '2025 — 2026',
+    description:
+      'Streaming-focused web app with playlists, playback, and a clean listening experience on the browser.',
+    details:
+      'Built a Music Web App with streaming features, playlist management, and a responsive player UI. Handled backend data models and frontend flows so browsing and playback feel fast and reliable.',
+    highlights: [
+      'Streaming playback flows',
+      'Playlist management',
+      'Responsive player UI',
+    ],
+    skills: ['Laravel', 'PHP', 'MySQL', 'JavaScript'],
+    category: 'Web',
+    image: MUSIC_APP_IMAGE_URL,
+  },
+  {
+    num: '03',
+    title: 'Voting Web App',
+    company: 'Professional Role',
+    role: 'Full-Stack Developer',
+    location: LOCATION,
+    period: '2025',
+    description:
+      'Web voting system with live tallying, secure ballots, and clear real-time results.',
+    details:
+      'Designed and shipped a Voting Web App with secure casting, live result updates, and an admin-friendly structure for campaigns and tallies.',
+    highlights: [
+      'Secure ballot casting',
+      'Live result updates',
+      'Campaign-ready admin flows',
+    ],
+    skills: ['Laravel', 'PHP', 'MySQL', 'Real-time UI'],
+    category: 'Web',
+    image: VOTING_APP_IMAGE_URL,
+  },
+  {
+    num: '04',
+    title: 'School Management App',
+    company: 'Professional Role',
+    role: 'Mobile App Developer',
+    location: LOCATION,
+    period: '2025 — 2026',
+    description:
+      'Cross-platform school app for attendance, grades, and day-to-day campus workflows.',
+    details:
+      'Part of a multi-app mobile engagement: built School Management with attendance and grade tracking, synced through Firebase for realtime updates and reliable offline-friendly UX patterns.',
+    highlights: [
+      'Attendance & grade tracking',
+      'Firebase realtime sync',
+      'Cross-platform React Native',
+    ],
+    skills: ['React Native', 'Firebase', 'Mobile UI'],
     category: 'Mobile',
     image: MOBILE_APP_IMAGE_URL,
   },
   {
-    title: 'Independent Mobile Developer',
-    company: 'Freelance & Personal Projects',
-    location: 'Remote',
-    period: '2025',
-    description: 'Designed and developed a suite of mobile applications featuring an E-Commerce platform, a Voting app, a Music streaming app, and "Loving 360". Emphasized responsive UI design, smooth animations, and seamless user experiences on both iOS and Android.',
-    details: 'Independently designed and built 4+ mobile applications from concept to store-ready. Built an E-Commerce platform with product catalogs and payments, a Voting app with live tallying, a Music streaming app with playlists and playback, and "Loving 360" — a relationship-focused app. Emphasized smooth animations, responsive layouts, and delightful UX on both platforms.',
-    skills: ['React Native', 'JavaScript', 'Cross-Platform', 'Mobile UI Design'],
+    num: '05',
+    title: 'Trip Booking App',
+    company: 'Professional Role',
+    role: 'Mobile App Developer',
+    location: LOCATION,
+    period: '2025 — 2026',
+    description:
+      'Travel booking flows — browse trips, reserve seats, and track bookings on iOS and Android.',
+    details:
+      'Shipped a Trip App with booking flows, listing screens, and Firebase-backed data so travelers can discover and reserve trips smoothly across devices.',
+    highlights: [
+      'Trip listings & search',
+      'Booking reservation flow',
+      'Push-ready Firebase stack',
+    ],
+    skills: ['React Native', 'Firebase', 'API Integration'],
     category: 'Mobile',
-    image: INDEPENDENT_IMAGE_URL,
+    image: TRIP_APP_IMAGE_URL,
   },
-{
+  {
+    num: '06',
+    title: 'Shop & Commerce Apps',
+    company: 'Freelance & Professional',
+    role: 'Independent Mobile Developer',
+    location: 'Remote / Yangon',
+    period: '2025',
+    description:
+      'E-commerce and shop experiences — catalogs, cart, checkout — plus personal apps like Loving 360.',
+    details:
+      'Designed and built commerce-focused mobile apps with product catalogs, cart, and checkout. Independently shipped related products including a Voting app, Music streaming app, and Loving 360 with polished UI and smooth animations.',
+    highlights: [
+      'Catalog · cart · checkout',
+      '4+ apps from concept to ready',
+      'Polished cross-platform UX',
+    ],
+    skills: ['React Native', 'JavaScript', 'Firebase', 'UI Design'],
+    category: 'Mobile',
+    image: SHOP_APP_IMAGE_URL,
+  },
+  {
+    num: '07',
     title: 'Employee Management System',
-    company: 'OJT Project',
+    company: 'MST College · OJT',
+    role: 'PHP Developer',
     location: 'MST College Training',
     period: '2025',
-    description: 'Built a comprehensive Employee Management System from scratch using Pure PHP. Designed the relational database architecture and developed clean, functional interfaces for employee tracking and HR administration.',
-    details: 'Designed and developed a full Employee Management System using pure PHP without frameworks — demonstrating deep understanding of core language features. Created relational database schemas for employees, departments, attendance, and leave management. Built clean, functional CRUD interfaces for HR administration.',
-    skills: ['Pure PHP', 'MySQL', 'HTML/CSS', 'System Design', 'Relational Databases'],
+    description:
+      'HR-focused EMS built in pure PHP — employees, departments, attendance, and leave.',
+    details:
+      'Designed relational schemas and CRUD interfaces for employees, departments, attendance, and leave without a framework — proving core PHP and system design skills.',
+    highlights: [
+      'Relational DB architecture',
+      'Pure PHP CRUD admin UI',
+      'Attendance & leave modules',
+    ],
+    skills: ['Pure PHP', 'MySQL', 'HTML/CSS', 'System Design'],
     category: 'Web',
     image: EMS_IMAGE_URL,
   },
   {
-    title: 'Point of Sale (POS) System',
-    company: 'MST College (Final Project)',
+    num: '08',
+    title: 'Point of Sale (POS)',
+    company: 'MST College · Capstone',
+    role: 'Java Desktop Developer',
     location: LOCATION,
     period: '2025',
-    description: 'Developed a robust desktop Point of Sale (POS) application using JavaFX as the capstone project. Implemented inventory management, secure transaction handling, and a user-friendly cashier interface utilizing Object-Oriented Programming principles.',
-    details: 'Built a complete desktop POS system with JavaFX as my capstone project. Implemented inventory management with stock tracking, secure transaction handling with receipt generation, and an intuitive cashier interface. Applied Object-Oriented Programming principles throughout — inheritance, encapsulation, and MVC architecture to keep the codebase maintainable and extensible.',
-    skills: ['Java', 'JavaFX', 'Desktop Application', 'OOP', 'Database Management'],
+    description:
+      'Desktop POS with inventory, secure transactions, receipts, and a cashier-first UI in JavaFX.',
+    details:
+      'Capstone desktop POS: stock tracking, transaction handling, receipt generation, and MVC structure using OOP principles for a maintainable JavaFX codebase.',
+    highlights: [
+      'Inventory & stock tracking',
+      'Secure checkout + receipts',
+      'JavaFX · MVC · OOP',
+    ],
+    skills: ['Java', 'JavaFX', 'OOP', 'MVC'],
     category: 'Desktop',
     image: POS_IMAGE_URL,
   },
