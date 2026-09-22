@@ -4,7 +4,7 @@ import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig(() => ({
-  base: "/khantyarzarhtet.github.io/",
+  base: "/khantyarzarhtet.dev/",
   server: {
     host: "::",
     port: 8080,
