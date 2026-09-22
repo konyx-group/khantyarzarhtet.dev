@@ -45,6 +45,7 @@ export const RESUME_URL = `${import.meta.env.BASE_URL}resume.html`
 // ---- Images (Hero / Education / Work) ----
 export const HERO_IMAGE_URL =
   'https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=1920'
+export const HERO_PROFILE_URL = `${import.meta.env.BASE_URL}hero-image.jpg`
 export const UCSY_IMAGE_URL =
   'https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?auto=compress&cs=tinysrgb&w=1200'
 export const MST_IMAGE_URL =

@@ -47,13 +47,16 @@ export function About() {
             className="order-1 lg:order-2 flex items-center"
           >
             <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
-              Hi, I'm Khant — a full-stack developer focused on turning complex problems into fast, accessible, and human-centered applications. I care deeply about clean code, thoughtful design, and building software that genuinely makes a difference.
+              Hi, I'm Khant — a software developer driven by a deep passion for clean code and thoughtful design. <br />
+              My journey began in mobile development, which gave me a strong foundation in user-centric experiences. <br />
+              Today, as a full-stack developer, I bridge the gap between engaging front-end interfaces and robust, scalable back-end systems. <br />
+              I don't just write code; I focus on building reliable software solutions that genuinely solve real-world problems.
             </p>
           </motion.div>
         </div>
 
         {/* Quote Block - Philosophy */}
-        <motion.div
+        {/* <motion.div
           {...fadeInUp}
           className="mb-24 lg:mb-32"
         >
@@ -66,7 +69,7 @@ export function About() {
           <p className="mt-6 text-sm text-gray-500 tracking-widest uppercase">
             MY DEVELOPMENT PHILOSOPHY
           </p>
-        </motion.div>
+        </motion.div> */}
 
         {/* Second Block - Learning by Building */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24 mb-24 lg:mb-32">
@@ -75,7 +78,9 @@ export function About() {
             className="flex items-center lg:text-right"
           >
             <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
-              I believe in learning by building. Every project is a chance to solve real-world problems and sharpen my craft — from desktop applications to cross-platform mobile apps and scalable web platforms. I'm always exploring new technologies and pushing my boundaries further.
+              I believe the best way to master the craft is to build. <br/>
+              Every project is an opportunity to push my boundaries and solve real-world challenges. <br/>
+              Whether I'm developing a cross-platform mobile app or architecting a scalable web platform, my focus remains constant: delivering software that is clean, accessible, and meaningful.
             </p>
           </motion.div>
 
@@ -90,7 +95,7 @@ export function About() {
               className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-700"
             />
             <p className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
-              LEARNING BY BUILDING
+              MY DEVELOPMENT PHILOSOPHY
             </p>
           </motion.div>
         </div>
@@ -106,7 +111,7 @@ export function About() {
             />
             <p className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
               PROFESSIONAL JOURNEY<br />
-              (2025 - PRESENT)
+              (2024 - PRESENT)
             </p>
           </motion.div>
 
@@ -116,7 +121,9 @@ export function About() {
             className="flex items-center"
           >
             <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
-              After gaining diverse industry experience—including working as a Mobile Developer in late 2025—I currently work full-time as a PHP Laravel Developer. Today, my focus is on writing robust back-end code, building scalable web applications, and delivering reliable software solutions.
+              My career started in the fast-paced mobile development space, teaching me the critical importance of user experience and interface design. <br/>
+              Building on that foundation, I transitioned into a full-time PHP Laravel Developer role. <br/>
+              Today, I leverage my diverse front-end intuition to architect powerful, scalable back-end solutions—ensuring the products I build are robust from the inside out.
             </p>
           </motion.div>
         </div>
