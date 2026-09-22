@@ -1,126 +1,79 @@
-import { motion } from 'framer-motion'
 import {
   ABOUT_DEV_IMAGE_URL,
   ABOUT_CODE_IMAGE_URL,
   ABOUT_TEAM_IMAGE_URL,
 } from '@/lib/constants'
+import { Reveal, SectionHeader, SectionShell, Tag } from '@/components/shared/PortfolioUI'
 
-const fadeInUp = {
-  initial: { opacity: 0, y: 40 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: '-100px' },
-  transition: { duration: 0.8, ease: 'easeOut' }
-}
+const values = [
+  { image: ABOUT_CODE_IMAGE_URL, label: 'Learning by building', number: '01' },
+  { image: ABOUT_TEAM_IMAGE_URL, label: 'Collaboration by default', number: '02' },
+]
 
 export function About() {
   return (
-    <section id="about" className="section-padding">
-      <div className="max-w-7xl mx-auto">
-        {/* Section Label */}
-        <motion.div {...fadeInUp} className="mb-16 flex items-center gap-4">
-          <span className="inline-block px-3 py-1 text-xs font-medium tracking-widest uppercase text-white bg-white/10 backdrop-blur-sm border border-white/20 rounded-full">
-            About Khant
-          </span>
-          <div className="flex-1 h-px bg-gray-600" />
-        </motion.div>
+    <SectionShell id="about">
+      <SectionHeader
+        index="01"
+        eyebrow="About"
+        title="ENGINEER WITH AN EYE FOR DESIGN."
+        description="I turn complex product problems into focused, dependable experiences — from database architecture to the final interaction."
+      />
 
-        {/* First Block - Personal Intro */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24 mb-24 lg:mb-32">
-          <motion.div
-            {...fadeInUp}
-            className="order-2 lg:order-1"
-          >
+      <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+        <Reveal className="group relative min-h-[28rem] overflow-hidden rounded-3xl sm:min-h-[38rem]">
             <img
               src={ABOUT_DEV_IMAGE_URL}
               alt="Developer at a laptop in a modern workspace"
               loading="lazy"
-              className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-700"
+              className="absolute inset-0 h-full w-full object-cover grayscale transition duration-700 group-hover:scale-[1.03] group-hover:grayscale-0"
             />
-            <p className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
-              FULL STACK DEVELOPER / MYANMAR
-            </p>
-          </motion.div>
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
+            <div className="absolute bottom-0 left-0 p-6 sm:p-8">
+              <Tag>Yangon, Myanmar</Tag>
+              <p className="mt-4 max-w-lg text-lg leading-8 text-white/80">
+                I care about the details people feel: speed, clarity, accessibility, and software
+                that stays maintainable after launch.
+              </p>
+            </div>
+        </Reveal>
 
-          <motion.div
-            {...fadeInUp}
-            transition={{ ...fadeInUp.transition, delay: 0.2 }}
-            className="order-1 lg:order-2 flex items-center"
-          >
-            <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
-              Hi, I'm Khant — a full-stack developer focused on turning complex problems into fast, accessible, and human-centered applications. I care deeply about clean code, thoughtful design, and building software that genuinely makes a difference.
+        <div className="grid gap-6">
+          <Reveal className="glass-panel rounded-3xl p-7 sm:p-9">
+            <span className="font-mono text-xs text-cyan-300">CURRENTLY</span>
+            <p className="mt-8 font-display text-4xl leading-[0.95] sm:text-5xl">
+              SHIPPING SCALABLE WEB PRODUCTS WITH PHP & LARAVEL.
             </p>
-          </motion.div>
-        </div>
-
-        {/* Quote Block - Philosophy */}
-        <motion.div
-          {...fadeInUp}
-          className="mb-24 lg:mb-32"
-        >
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight tracking-tight text-gray-300">
-            "BUILDING FAST,<br />
-            <span className="text-white underline underline-offset-8">ACCESSIBLE</span>, AND<br />
-            HUMAN-CENTERED<br />
-            SOFTWARE."
-          </h2>
-          <p className="mt-6 text-sm text-gray-500 tracking-widest uppercase">
-            MY DEVELOPMENT PHILOSOPHY
-          </p>
-        </motion.div>
-
-        {/* Second Block - Learning by Building */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24 mb-24 lg:mb-32">
-          <motion.div
-            {...fadeInUp}
-            className="flex items-center lg:text-right"
-          >
-            <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
-              I believe in learning by building. Every project is a chance to solve real-world problems and sharpen my craft — from desktop applications to cross-platform mobile apps and scalable web platforms. I'm always exploring new technologies and pushing my boundaries further.
+            <p className="mt-6 text-sm leading-7 text-white/50">
+              Previously focused on cross-platform mobile products, now building robust back-end
+              systems and polished end-to-end web experiences.
             </p>
-          </motion.div>
-
-          <motion.div
-            {...fadeInUp}
-            transition={{ ...fadeInUp.transition, delay: 0.2 }}
-          >
-            <img
-              src={ABOUT_CODE_IMAGE_URL}
-              alt="Lines of code on a monitor"
-              loading="lazy"
-              className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-700"
-            />
-            <p className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
-              LEARNING BY BUILDING
-            </p>
-          </motion.div>
-        </div>
-
-        {/* Third Block - Current Career */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24">
-          <motion.div {...fadeInUp}>
-            <img
-              src={ABOUT_TEAM_IMAGE_URL}
-              alt="Team collaborating around a laptop"
-              loading="lazy"
-              className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-700"
-            />
-            <p className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
-              PROFESSIONAL JOURNEY<br />
-              (2025 - PRESENT)
-            </p>
-          </motion.div>
-
-          <motion.div
-            {...fadeInUp}
-            transition={{ ...fadeInUp.transition, delay: 0.2 }}
-            className="flex items-center"
-          >
-            <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
-              After gaining diverse industry experience—including working as a Mobile Developer in late 2025—I currently work full-time as a PHP Laravel Developer. Today, my focus is on writing robust back-end code, building scalable web applications, and delivering reliable software solutions.
-            </p>
-          </motion.div>
+          </Reveal>
+          <div className="grid grid-cols-2 gap-4">
+            {values.map((value, index) => (
+              <Reveal
+                key={value.label}
+                delay={index * 0.08}
+                className="group relative min-h-52 overflow-hidden rounded-3xl"
+              >
+                <img
+                  src={value.image}
+                  alt=""
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover opacity-45 grayscale transition duration-500 group-hover:scale-105 group-hover:grayscale-0"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 to-transparent" />
+                <span className="absolute left-5 top-5 font-mono text-xs text-cyan-300">
+                  {value.number}
+                </span>
+                <p className="absolute bottom-5 left-5 right-5 text-sm font-medium text-white/80">
+                  {value.label}
+                </p>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
-    </section>
+    </SectionShell>
   )
 }

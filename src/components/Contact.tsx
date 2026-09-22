@@ -1,5 +1,4 @@
 import { useState, type FormEvent } from 'react'
-import { motion } from 'framer-motion'
 import { useToast } from '@/hooks/use-toast'
 import {
   EMAIL,
@@ -9,19 +8,13 @@ import {
   LINKEDIN_URL,
   TELEGRAM_URL,
 } from '@/lib/constants'
+import { Reveal, SectionHeader, SectionShell } from '@/components/shared/PortfolioUI'
 
 const contacts = [
   { label: 'OPEN SOURCE', link: GITHUB_URL },
   { label: 'PROFESSIONAL', link: LINKEDIN_URL },
   { label: 'TELEGRAM', link: TELEGRAM_URL },
 ]
-
-const fadeInUp = {
-  initial: { opacity: 0, y: 40 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: '-100px' },
-  transition: { duration: 0.8, ease: 'easeOut' }
-}
 
 export function Contact() {
   const { toast } = useToast()
@@ -56,36 +49,18 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="section-padding">
-      <div className="max-w-7xl mx-auto">
-        {/* Section Label */}
-        <motion.div {...fadeInUp} className="mb-12 flex items-center gap-4">
-          <span className="inline-block px-3 py-1 text-xs font-medium tracking-widest uppercase text-white bg-white/10 backdrop-blur-sm border border-white/20 rounded-full">
-            Contact
-          </span>
-          <div className="flex-1 h-px bg-gray-600" />
-        </motion.div>
-
-        {/* Headline - smaller */}
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-none tracking-tight mb-8"
-        >
-          Get in touch
-        </motion.h2>
-
-        <motion.div
-          {...fadeInUp}
-          className="w-full h-px bg-gray-700 mb-12 lg:mb-16"
+    <SectionShell id="contact">
+        <SectionHeader
+          index="05"
+          eyebrow="Contact"
+          title="LET'S BUILD SOMETHING USEFUL."
+          description="Have a product idea, an engineering challenge, or a role that looks like a strong fit? I’d like to hear about it."
         />
 
         {/* Contact Grid: Left form, Right info */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
           {/* Contact Form */}
-          <motion.div {...fadeInUp}>
+          <Reveal>
             <h3 className="text-xl md:text-2xl text-white font-light leading-tight mb-6">
               I'M CURRENTLY OPEN TO<br />
               PROJECTS & ROLES
@@ -94,56 +69,58 @@ export function Contact() {
               IN A HURRY? PLEASE REACH OUT DIRECTLY
             </p>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4" aria-label="Contact form">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <label className="sr-only" htmlFor="contact-name">Your name</label>
                 <input
+                  id="contact-name"
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Your name"
                   required
-                  className="w-full px-4 py-3 bg-white/[0.03] border border-white/10 rounded-lg text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-white/30 focus:bg-white/[0.05] transition-all duration-300"
+                  className="min-h-12 w-full rounded-xl border border-white/10 bg-white/[0.035] px-4 text-sm text-white placeholder:text-white/25 transition focus:border-cyan-300/40 focus:bg-white/[0.06] focus:outline-none"
                 />
+                <label className="sr-only" htmlFor="contact-email">Your email</label>
                 <input
+                  id="contact-email"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Your email"
                   required
-                  className="w-full px-4 py-3 bg-white/[0.03] border border-white/10 rounded-lg text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-white/30 focus:bg-white/[0.05] transition-all duration-300"
+                  className="min-h-12 w-full rounded-xl border border-white/10 bg-white/[0.035] px-4 text-sm text-white placeholder:text-white/25 transition focus:border-cyan-300/40 focus:bg-white/[0.06] focus:outline-none"
                 />
               </div>
+              <label className="sr-only" htmlFor="contact-message">Your message</label>
               <textarea
+                id="contact-message"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Your message…"
                 required
                 rows={4}
-                className="w-full px-4 py-3 bg-white/[0.03] border border-white/10 rounded-lg text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-white/30 focus:bg-white/[0.05] transition-all duration-300 resize-none"
+                className="w-full resize-none rounded-xl border border-white/10 bg-white/[0.035] px-4 py-3 text-sm text-white placeholder:text-white/25 transition focus:border-cyan-300/40 focus:bg-white/[0.06] focus:outline-none"
               />
               <button
                 type="submit"
-                className="px-6 py-3 text-sm font-medium tracking-widest uppercase text-black bg-white rounded-full hover:bg-gray-200 transition-colors duration-300"
+                className="min-h-12 rounded-full bg-cyan-300 px-6 text-xs font-semibold uppercase tracking-[0.16em] text-slate-950 transition hover:bg-cyan-200"
               >
                 Send Message
               </button>
             </form>
-          </motion.div>
+          </Reveal>
 
           {/* Right Column - Direct Links */}
-          <motion.div {...fadeInUp} transition={{ ...fadeInUp.transition, delay: 0.2 }}>
+          <Reveal delay={0.12}>
             <div className="space-y-0">
-              {contacts.map((contact, index) => (
-                <motion.a
+              {contacts.map((contact) => (
+                <a
                   key={contact.label}
                   href={contact.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="flex items-center justify-between border-t border-gray-800 py-5 group hover:bg-gray-900/30 transition-colors px-4 -mx-4"
+                  className="group -mx-4 flex items-center justify-between border-t border-white/10 px-4 py-5 transition-colors hover:bg-white/[0.03]"
                 >
                   <span className="text-sm text-gray-400 tracking-widest group-hover:text-white transition-colors">
                     {contact.label}
@@ -151,7 +128,7 @@ export function Contact() {
                   <span className="text-gray-500 group-hover:text-white transition-colors">
                     ↗
                   </span>
-                </motion.a>
+                </a>
               ))}
               <div className="border-t border-gray-800" />
             </div>
@@ -202,25 +179,18 @@ export function Contact() {
                 </a>
               </div>
             </div>
-          </motion.div>
+          </Reveal>
         </div>
 
         {/* Footer */}
-        <motion.footer
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="mt-24 lg:mt-32 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4"
-        >
+        <Reveal className="mt-24 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 md:flex-row lg:mt-32">
           <p className="text-xs text-gray-400">
             © {new Date().getFullYear()} {FULL_NAME}. All rights reserved.
           </p>
           <p className="text-xs text-gray-400">
             Myanmar
           </p>
-        </motion.footer>
-      </div>
-    </section>
+        </Reveal>
+    </SectionShell>
   )
 }

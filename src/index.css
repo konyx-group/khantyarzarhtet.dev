@@ -4,41 +4,37 @@
 
 @layer base {
   :root {
-    --background: 0 0% 4%;
-    --foreground: 0 0% 98%;
+    --background: 222 47% 5%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 4%;
+    --card: 222 35% 8%;
     --card-foreground: 0 0% 98%;
 
     --popover: 0 0% 4%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 4%;
+    --primary: 187 94% 73%;
+    --primary-foreground: 222 47% 5%;
 
-    --secondary: 0 0% 10%;
+    --secondary: 222 25% 12%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 0 0% 40%;
-    --muted-foreground: 0 0% 60%;
+    --muted: 215 16% 47%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 0 0% 53%;
-    --accent-foreground: 0 0% 4%;
+    --accent: 187 94% 73%;
+    --accent-foreground: 222 47% 5%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 0 0% 98%;
+    --border: 215 28% 17%;
+    --input: 215 28% 17%;
+    --ring: 187 94% 73%;
 
-    --radius: 0.5rem;
-
-    /* Brand palette — colors တွေအားလုံး ဒီမှာစုထားတယ်။
-       ပြောင်းချင်ရင် ဒီ value တွေပဲ ပြောင်းရမယ်။
-       tailwind.config.ts မှာ `brand-*` class တွေနဲ့ ဆက်စပ်ထားတယ်။ */
-    --surface: #0d0d0d; /* ပုံမှန် background နဲ့ ခွဲပြီး section အမည်းပြားများ */
-    --panel: #111111;   /* dialog / menu surface */
+    --radius: 0.875rem;
+    --surface: #07101e;
+    --panel: #0c1626;
   }
 
   * {
@@ -50,6 +46,7 @@
 
   html {
     scroll-behavior: smooth;
+    background: hsl(var(--background));
   }
 
   body {
@@ -57,6 +54,10 @@
     @apply bg-background text-foreground;
     line-height: 1.6;
     overflow-x: hidden;
+    background-image:
+      radial-gradient(circle at 15% -10%, rgba(34, 211, 238, 0.12), transparent 28rem),
+      radial-gradient(circle at 90% 25%, rgba(99, 102, 241, 0.08), transparent 32rem);
+    background-attachment: fixed;
   }
 
   ::selection {
@@ -73,8 +74,8 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 9999;
-  opacity: 0.035;
+  z-index: 60;
+  opacity: 0.025;
   mix-blend-mode: overlay;
 }
 
@@ -102,12 +103,26 @@
   90% { transform: translate(-10%, 10%); }
 }
 
-/* Typography utilities */
 .font-display {
   font-family: 'Bebas Neue', sans-serif;
   text-transform: uppercase;
   letter-spacing: -0.02em;
-  line-height: 0.85;
+  line-height: 0.88;
+}
+
+.eyebrow {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgb(165 243 252 / 0.9);
+}
+
+.glass-panel {
+  border: 1px solid rgb(255 255 255 / 0.09);
+  background: linear-gradient(145deg, rgb(255 255 255 / 0.06), rgb(255 255 255 / 0.025));
+  box-shadow: 0 24px 80px rgb(0 0 0 / 0.2);
+  backdrop-filter: blur(20px);
 }
 
 /* Custom scrollbar */
@@ -128,26 +143,8 @@
   background: #444;
 }
 
-/* For Section Padding */
-.section-padding {
-  padding: 4rem 1.5rem;
-}
-
-@media (min-width: 768px) {
-  .section-padding {
-    padding: 2rem 2rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .section-padding {
-    padding: 5rem 4rem;
-  }
-}
-
-/* Sections with ids used for smooth scrolling get breathing room */
 section[id] {
-  scroll-margin-top: 0rem;
+  scroll-margin-top: 5rem;
 }
 
 /* Image grayscale filter */
@@ -158,4 +155,27 @@ section[id] {
 
 .img-editorial:hover {
   filter: grayscale(0%);
+}
+
+:focus-visible {
+  outline: 2px solid rgb(103 232 249);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .grain-overlay::before {
+    animation: none;
+  }
 }

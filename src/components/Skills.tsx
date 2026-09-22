@@ -1,52 +1,38 @@
-import { motion } from 'framer-motion'
+import { Code2, Database, Layout, Smartphone } from 'lucide-react'
 import { SKILLS } from '@/lib/data'
+import { Reveal, SectionHeader, SectionShell } from '@/components/shared/PortfolioUI'
 
-const fadeInUp = {
-  initial: { opacity: 0, y: 40 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: '-100px' },
-  transition: { duration: 0.8, ease: 'easeOut' }
-}
+const icons = [Code2, Layout, Smartphone, Database]
 
 export function Skills() {
   return (
-    <section id="skills" className="section-padding bg-brand-surface">
-      <div className="max-w-7xl mx-auto">
-        {/* Section Label */}
-        <motion.div {...fadeInUp} className="mb-12 flex items-center gap-4">
-          <span className="inline-block px-3 py-1 text-xs font-medium tracking-widest uppercase text-white bg-white/10 backdrop-blur-sm border border-white/20 rounded-full">
-            Expertise
-          </span>
-          <div className="flex-1 h-px bg-gray-600" />
-        </motion.div>
-
-        {/* Section Title - smaller */}
-        <motion.h2
-          {...fadeInUp}
-          className="font-display text-4xl sm:text-5xl md:text-6xl leading-none tracking-tight mb-12 lg:mb-16"
-        >
-          SKILLS
-        </motion.h2>
-
-        {/* Skills Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
+    <SectionShell id="skills" surface>
+      <SectionHeader
+        index="02"
+        eyebrow="Capabilities"
+        title="TOOLS I BUILD WITH."
+        description="A practical full-stack toolkit shaped by shipping real products across web, mobile, desktop, and data."
+      />
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {SKILLS.map((skill, index) => (
-            <motion.div
+            <Reveal
               key={skill}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.08 }}
-              className="group flex items-center gap-3 px-5 py-4 bg-white/[0.03] border border-white/10 rounded-lg hover:bg-white/[0.08] hover:border-white/20 transition-all duration-300"
+              delay={index * 0.04}
+              className="group min-h-44 rounded-2xl border border-white/[0.08] bg-slate-950/40 p-6 transition duration-300 hover:-translate-y-1 hover:border-cyan-300/25 hover:bg-white/[0.05]"
             >
-              <span className="flex-none w-1.5 h-1.5 rounded-full bg-gray-400 group-hover:bg-white transition-colors duration-300" />
-              <span className="text-sm md:text-base text-gray-300 group-hover:text-white transition-colors duration-300">
+              {(() => {
+                const Icon = icons[index % icons.length]
+                return <Icon className="h-5 w-5 text-cyan-300/80" aria-hidden="true" />
+              })()}
+              <span className="mt-14 block text-base font-medium text-white/75 transition-colors group-hover:text-white">
                 {skill}
               </span>
-            </motion.div>
+              <span className="mt-3 block font-mono text-[10px] text-white/25">
+                0{index + 1}
+              </span>
+            </Reveal>
           ))}
-        </div>
       </div>
-    </section>
+    </SectionShell>
   )
 }

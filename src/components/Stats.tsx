@@ -1,35 +1,27 @@
-import { motion } from 'framer-motion'
 import { STATS } from '@/lib/data'
-
-const fadeInUp = {
-  initial: { opacity: 0, y: 20 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.6, ease: 'easeOut' }
-}
+import { Container, Reveal } from '@/components/shared/PortfolioUI'
 
 export function Stats() {
   return (
-    <section className="bg-brand-surface border-y border-gray-900">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16 py-10 md:py-14">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+    <section className="border-y border-white/[0.07] bg-white/[0.025]">
+      <Container className="py-8 sm:py-10">
+        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-white/10 md:grid-cols-4">
           {STATS.map((stat, index) => (
-            <motion.div
+            <Reveal
               key={stat.label}
-              {...fadeInUp}
-              transition={{ ...fadeInUp.transition, delay: index * 0.08 }}
-              className="text-center"
+              delay={index * 0.06}
+              className="bg-slate-950/80 px-4 py-7 text-center sm:py-9"
             >
-              <p className="text-2xl md:text-3xl font-light text-white leading-none">
+              <p className="font-display text-4xl leading-none text-white sm:text-5xl">
                 {stat.value}
               </p>
-              <p className="mt-2 text-xs md:text-sm text-gray-500">
+              <p className="mt-2 text-[10px] uppercase tracking-[0.14em] text-white/35 sm:text-xs">
                 {stat.label}
               </p>
-            </motion.div>
+            </Reveal>
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   )
 }

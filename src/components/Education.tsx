@@ -1,136 +1,75 @@
-import { motion } from 'framer-motion'
 import {
   UCSY_IMAGE_URL,
   MST_IMAGE_URL,
   OJT_IMAGE_URL,
 } from '@/lib/constants'
+import { Reveal, SectionHeader, SectionShell, Tag } from '@/components/shared/PortfolioUI'
 
-const fadeInUp = {
-  initial: { opacity: 0, y: 40 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: '-100px' },
-  transition: { duration: 0.8, ease: 'easeOut' }
-}
+const education = [
+  {
+    title: 'Computer Science',
+    place: 'University of Computer Studies, Yangon',
+    meta: 'Yangon, Myanmar',
+    description:
+      'A foundation in programming, algorithms, data structures, and practical software engineering.',
+    image: UCSY_IMAGE_URL,
+  },
+  {
+    title: 'ITPEC — Fundamental Information Technology Engineer',
+    place: 'MST College',
+    meta: 'Passed April 2025',
+    description:
+      'Studied Japan’s ITPEC program and passed the FE examination, validating a broad engineering foundation.',
+    image: MST_IMAGE_URL,
+  },
+  {
+    title: 'OJT — Employee Management System',
+    place: 'On-the-job training',
+    meta: '2025',
+    description:
+      'Built a complete employee management system in pure PHP, translating real operational needs into maintainable software.',
+    image: OJT_IMAGE_URL,
+  },
+]
 
 export function Education() {
   return (
-    <section id="education" className="section-padding bg-brand-surface">
-      <div className="max-w-7xl mx-auto">
-        {/* Section Label */}
-        <motion.div {...fadeInUp} className="mb-12 flex items-center gap-4">
-          <span className="inline-block px-3 py-1 text-xs font-medium tracking-widest uppercase text-white bg-white/10 backdrop-blur-sm border border-white/20 rounded-full">
-            Background
-          </span>
-          <div className="flex-1 h-px bg-gray-600" />
-        </motion.div>
-
-        {/* Section Title - smaller */}
-        <motion.h2
-          {...fadeInUp}
-          className="font-display text-4xl sm:text-5xl md:text-6xl leading-none tracking-tight mb-12 lg:mb-16"
-        >
-          EDUCATION
-        </motion.h2>
-
-        {/* Education Items */}
-        <div className="space-y-16 lg:space-y-20">
-          {/* UCSY */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24">
-            <motion.div {...fadeInUp}>
+    <SectionShell id="education" surface>
+      <SectionHeader
+        index="04"
+        eyebrow="Journey"
+        title="FOUNDATIONS & MILESTONES."
+        description="The academic and practical experiences that shaped how I approach engineering."
+      />
+      <div className="space-y-4">
+        {education.map((item, index) => (
+          <Reveal
+            key={item.title}
+            delay={index * 0.08}
+            className="group grid overflow-hidden rounded-3xl border border-white/[0.08] bg-slate-950/40 md:grid-cols-[18rem_1fr]"
+          >
+            <div className="h-56 overflow-hidden md:h-full">
               <img
-                src={UCSY_IMAGE_URL}
-                alt="University of Computer Studies, Yangon"
+                src={item.image}
+                alt=""
                 loading="lazy"
-                className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-700"
+                className="h-full w-full object-cover grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0"
               />
-              <p className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
-                UNIVERSITY OF COMPUTER STUDIES, YANGON (UCSY)
-              </p>
-            </motion.div>
-
-            <motion.div
-              {...fadeInUp}
-              transition={{ ...fadeInUp.transition, delay: 0.2 }}
-              className="flex items-center"
-            >
-              <div>
-                <h3 className="text-xl lg:text-2xl font-light text-white mb-4">
-                  Computer Science
-                </h3>
-                <p className="text-gray-400 leading-relaxed mb-4 text-sm lg:text-base">
-                  My journey in computer science began here, driven by a passion for practical engineering. Foundation in programming, algorithms, and software development.
-                </p>
-                <p className="text-sm text-gray-500">Yangon, Myanmar</p>
+            </div>
+            <div className="p-6 sm:p-8 lg:p-10">
+              <div className="mb-8 flex items-center justify-between gap-4">
+                <Tag>{item.place}</Tag>
+                <span className="font-mono text-xs text-cyan-300/60">0{index + 1}</span>
               </div>
-            </motion.div>
-          </div>
-
-          {/* MST College */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24">
-            <motion.div
-              {...fadeInUp}
-              className="flex items-center lg:order-2"
-            >
-              <div>
-                <h3 className="text-xl lg:text-2xl font-light text-white mb-4">
-                  ITPEC — Fundamental Information Technology Engineer (FE)
-                </h3>
-                <p className="text-gray-400 leading-relaxed mb-4 text-sm lg:text-base">
-                  Studied Japan's ITPEC programs at MST College and proudly passed the Fundamental Information Technology Engineer (FE) examination in April 2025.
-                </p>
-                <p className="text-sm text-gray-500">April 2025</p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              {...fadeInUp}
-              transition={{ ...fadeInUp.transition, delay: 0.2 }}
-              className="lg:order-1"
-            >
-              <img
-                src={MST_IMAGE_URL}
-                alt="Books and education"
-                loading="lazy"
-                className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-700"
-              />
-              <p className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
-                MST COLLEGE / MYANMAR
-              </p>
-            </motion.div>
-          </div>
-
-          {/* OJT Experience */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24">
-            <motion.div {...fadeInUp}>
-              <img
-                src={OJT_IMAGE_URL}
-                alt="Laptop with code"
-                loading="lazy"
-                className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-700"
-              />
-              <p className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
-                ON-THE-JOB TRAINING
-              </p>
-            </motion.div>
-
-            <motion.div
-              {...fadeInUp}
-              transition={{ ...fadeInUp.transition, delay: 0.2 }}
-              className="flex items-center"
-            >
-              <div>
-                <h3 className="text-xl lg:text-2xl font-light text-white mb-4">
-                  OJT — Employee Management System
-                </h3>
-                <p className="text-gray-400 leading-relaxed mb-4 text-sm lg:text-base">
-                  Crafted an Employee Management System with pure PHP during my On-the-Job Training, focused on solving real-world problems and building practical engineering skills.
-                </p>
-                <p className="text-sm text-gray-500">2025</p>
-              </div>
-            </motion.div>
-          </div>
-        </div>
+              <h3 className="max-w-2xl text-xl font-medium leading-snug text-white sm:text-2xl">
+                {item.title}
+              </h3>
+              <p className="mt-4 max-w-2xl text-sm leading-7 text-white/45">{item.description}</p>
+              <p className="mt-6 text-xs uppercase tracking-[0.14em] text-white/30">{item.meta}</p>
+            </div>
+          </Reveal>
+        ))}
       </div>
-    </section>
+    </SectionShell>
   )
 }

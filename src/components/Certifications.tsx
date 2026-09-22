@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
 import {
   Dialog,
   DialogContent,
@@ -8,61 +7,39 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import { CERTIFICATIONS, type Certification } from '@/lib/data'
-
-const fadeInUp = {
-  initial: { opacity: 0, y: 40 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: '-100px' },
-  transition: { duration: 0.8, ease: 'easeOut' }
-}
+import { Reveal, SectionHeader, SectionShell } from '@/components/shared/PortfolioUI'
 
 export function Certifications() {
   const [selectedCert, setSelectedCert] = useState<Certification | null>(null)
 
   return (
-    <section id="certifications" className="section-padding">
-      <div className="max-w-7xl mx-auto">
-        {/* Section Label */}
-        <motion.div {...fadeInUp} className="mb-12 flex items-center gap-4">
-          <span className="inline-block px-3 py-1 text-xs font-medium tracking-widest uppercase text-white bg-white/10 backdrop-blur-sm border border-white/20 rounded-full">
-            Achievements
-          </span>
-          <div className="flex-1 h-px bg-gray-600" />
-        </motion.div>
-
-        {/* Section Title */}
-        <motion.h2
-          {...fadeInUp}
-          className="font-display text-4xl sm:text-5xl md:text-6xl leading-none tracking-tight mb-12 lg:mb-16"
-        >
-          CERTIFICATIONS
-        </motion.h2>
+    <SectionShell id="certifications">
+        <SectionHeader
+          eyebrow="Credentials"
+          title="CERTIFIED. ALWAYS LEARNING."
+          description="Formal milestones that complement hands-on engineering experience."
+        />
 
         {/* Certification Cards - 2 columns, full width */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
           {CERTIFICATIONS.map((cert, index) => (
-            <motion.button
+            <Reveal
               key={cert.title}
-              onClick={() => setSelectedCert(cert)}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.08 }}
-              className="group flex items-center gap-3 px-5 py-4 bg-white/[0.03] border border-white/10 rounded-lg hover:bg-white/[0.08] hover:border-white/20 transition-all duration-300 cursor-pointer text-left"
+              delay={index * 0.06}
             >
-              <span className="flex-none w-1.5 h-1.5 rounded-full bg-gray-400 group-hover:bg-white transition-colors duration-300" />
-              <span className="flex-1 min-w-0">
-                <span className="block text-sm md:text-base text-gray-300 group-hover:text-white transition-colors duration-300">
-                  {cert.title}
+              <button
+                onClick={() => setSelectedCert(cert)}
+                className="group flex min-h-36 w-full items-end gap-4 rounded-2xl border border-white/10 bg-white/[0.025] p-6 text-left transition hover:-translate-y-1 hover:border-cyan-300/25 hover:bg-white/[0.05]"
+              >
+                <span className="min-w-0 flex-1">
+                  <span className="block text-base font-medium text-white/80 group-hover:text-white">
+                    {cert.title}
+                  </span>
+                  <span className="mt-2 block text-xs text-white/35">{cert.issuer}</span>
                 </span>
-                <span className="block text-xs text-gray-500 mt-0.5 group-hover:text-gray-400 transition-colors duration-300">
-                  {cert.issuer}
-                </span>
-              </span>
-              <span className="shrink-0 text-xs text-gray-600 group-hover:text-gray-400 transition-colors duration-300">
-                {cert.year}
-              </span>
-            </motion.button>
+                <span className="font-mono text-xs text-cyan-300/60">{cert.year}</span>
+              </button>
+            </Reveal>
           ))}
         </div>
 
@@ -104,7 +81,6 @@ export function Certifications() {
             </div>
           </DialogContent>
         </Dialog>
-      </div>
-    </section>
+    </SectionShell>
   )
 }

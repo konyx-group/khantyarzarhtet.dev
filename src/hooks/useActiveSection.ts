@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
+import { SECTIONS } from '@/lib/constants'
 
-const sections = ['about', 'skills', 'work', 'github', 'testimonials', 'certifications', 'education', 'writing', 'speaking', 'contact']
+const sectionIds = SECTIONS.map(({ id }) => id)
 
 export function useActiveSection() {
   const [activeSection, setActiveSection] = useState<string>('about')
@@ -8,7 +9,7 @@ export function useActiveSection() {
   useEffect(() => {
     const observers: IntersectionObserver[] = []
 
-    sections.forEach((sectionId) => {
+    sectionIds.forEach((sectionId) => {
       const element = document.getElementById(sectionId)
       if (!element) return
 
