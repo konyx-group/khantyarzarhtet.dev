@@ -1,5 +1,4 @@
 import { Navigation } from '@/components/Navigation'
-import { ScrollProgress } from '@/components/ScrollProgress'
 import { BackToTop } from '@/components/BackToTop'
 import { GrainOverlay } from '@/components/GrainOverlay'
 import { Hero } from '@/components/Hero'
@@ -19,7 +18,6 @@ export default function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <GrainOverlay />
-      <ScrollProgress />
       <Navigation />
       <BackToTop />
       <main>

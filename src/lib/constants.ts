@@ -36,6 +36,7 @@ export const SECTIONS = [
   { id: 'education', label: 'Education' },
   { id: 'writing', label: 'Writing' },
   { id: 'speaking', label: 'Speaking' },
+  { id: 'contact', label: 'Contact'}
 ] as const
 
 // ---- Resume ----

@@ -2,36 +2,45 @@ import { useState, useEffect } from 'react'
 
 const sections = ['about', 'skills', 'work', 'github', 'testimonials', 'certifications', 'education', 'writing', 'speaking', 'contact']
 
+/**
+ * Determines which section is currently "active" (shown in the page nav).
+ *
+ * Strategy: the active section is the bottom-most section whose top edge has
+ * crossed a trigger line fixed at `lineRatio` of the viewport height. This is
+ * deterministic — exactly one section can ever be active — and avoids the
+ * flapping cause by an IntersectionObserver "band" that lets two neighbouring
+ * sections be flagged at the same time.
+ */
 export function useActiveSection() {
-  const [activeSection, setActiveSection] = useState<string>('about')
+  const [activeSection, setActiveSection] = useState<string>('')
 
   useEffect(() => {
-    const observers: IntersectionObserver[] = []
+    const lineRatio = 0.35
 
-    sections.forEach((sectionId) => {
-      const element = document.getElementById(sectionId)
-      if (!element) return
+    const update = () => {
+      const line = window.innerHeight * lineRatio
+      let current = ''
 
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setActiveSection(sectionId)
-            }
-          })
-        },
-        {
-          rootMargin: '-20% 0px -60% 0px',
-          threshold: 0,
+      // Iterate in DOM order (top -> bottom). The last section whose top is
+      // above the line is the one we consider active.
+      for (const sectionId of sections) {
+        const el = document.getElementById(sectionId)
+        if (!el) continue
+        if (el.getBoundingClientRect().top <= line) {
+          current = sectionId
         }
-      )
+      }
 
-      observer.observe(element)
-      observers.push(observer)
-    })
+      setActiveSection(current)
+    }
+
+    update()
+    window.addEventListener('scroll', update, { passive: true })
+    window.addEventListener('resize', update)
 
     return () => {
-      observers.forEach((observer) => observer.disconnect())
+      window.removeEventListener('scroll', update)
+      window.removeEventListener('resize', update)
     }
   }, [])
 
