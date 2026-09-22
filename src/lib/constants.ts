@@ -30,9 +30,10 @@ export const PLACEHOLDER_LINK = '#'
 // ---- Section meta (navigation + section anchors) ----
 export const SECTIONS = [
   { id: 'about', label: 'About' },
+  { id: 'education', label: 'Education' },
   { id: 'skills', label: 'Skills' },
   { id: 'work', label: 'Work' },
-  { id: 'education', label: 'Education' },
+  { id: 'play', label: 'Play' },
   // { id: 'writing', label: 'Writing' },
   // { id: 'speaking', label: 'Speaking' },
   { id: 'contact', label: 'Contact'}
@@ -69,6 +70,12 @@ export const EMS_IMAGE_URL =
   'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800'
 export const POS_IMAGE_URL =
   'https://images.pexels.com/photos/4386321/pexels-photo-4386321.jpeg?auto=compress&cs=tinysrgb&w=800'
+
+// Play / side experiments
+export const PLAY_CLAW_IMAGE_URL = `${import.meta.env.BASE_URL}claw_machine.png`
+export const PLAY_RANDOM_NUMBER_IMAGE_URL = `${import.meta.env.BASE_URL}random_number.png`
+export const PLAY_SECRET_BOX_IMAGE_URL = `${import.meta.env.BASE_URL}secret_box.png`
+export const PLAY_FUNNY_GAME_IMAGE_URL = `${import.meta.env.BASE_URL}funny_game.png`
 
 // About section images
 export const ABOUT_DEV_IMAGE_URL =

@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
-
-const sections = ['about', 'skills', 'work', 'github', 'testimonials', 'education', 'writing', 'speaking', 'contact']
+import { SECTIONS } from '@/lib/constants'
 
 /**
  * Determines which section is currently "active" (shown in the page nav).
@@ -10,20 +9,21 @@ const sections = ['about', 'skills', 'work', 'github', 'testimonials', 'educatio
  * deterministic — exactly one section can ever be active — and avoids the
  * flapping cause by an IntersectionObserver "band" that lets two neighbouring
  * sections be flagged at the same time.
+ *
+ * Section order MUST match page DOM order (same as SECTIONS / Index).
  */
 export function useActiveSection() {
   const [activeSection, setActiveSection] = useState<string>('')
 
   useEffect(() => {
     const lineRatio = 0.35
+    const sectionIds = SECTIONS.map((s) => s.id)
 
     const update = () => {
       const line = window.innerHeight * lineRatio
       let current = ''
 
-      // Iterate in DOM order (top -> bottom). The last section whose top is
-      // above the line is the one we consider active.
-      for (const sectionId of sections) {
+      for (const sectionId of sectionIds) {
         const el = document.getElementById(sectionId)
         if (!el) continue
         if (el.getBoundingClientRect().top <= line) {
@@ -46,4 +46,3 @@ export function useActiveSection() {
 
   return activeSection
 }
-

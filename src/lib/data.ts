@@ -10,8 +10,12 @@ import {
   VOTING_APP_IMAGE_URL,
   TRIP_APP_IMAGE_URL,
   SHOP_APP_IMAGE_URL,
+  PLAY_CLAW_IMAGE_URL,
   PLACEHOLDER_LINK,
   LOCATION,
+  PLAY_SECRET_BOX_IMAGE_URL,
+  PLAY_RANDOM_NUMBER_IMAGE_URL,
+  PLAY_FUNNY_GAME_IMAGE_URL,
 } from './constants'
 
 // ---- Hero typewriter roles ----
@@ -273,6 +277,60 @@ export const PROJECTS: Project[] = [
 
 export const PROJECT_FILTERS = ['All', 'Web', 'Mobile', 'Desktop'] as const
 export type ProjectFilter = (typeof PROJECT_FILTERS)[number]
+
+// ---- Play (fun HTML/JS experiments on GitHub Pages) ----
+export type PlayProject = {
+  num: string
+  title: string
+  description: string
+  liveUrl: string
+  repoUrl: string
+  tags: string[]
+  image: string
+}
+
+export const PLAY_PROJECTS: PlayProject[] = [
+  {
+    num: '01',
+    title: 'Love Claw Machine',
+    description:
+      'A playful claw-machine game — insert a credit, move the claw, and grab a prize.',
+    liveUrl: 'https://konyx-group.github.io/claw-machine/',
+    repoUrl: 'https://github.com/konyx-group/claw-machine',
+    tags: ['HTML', 'CSS', 'JavaScript'],
+    image: PLAY_CLAW_IMAGE_URL,
+  },
+  {
+    num: '02',
+    title: 'Secret Audit Box',
+    description:
+      'Click mystery boxes for a light office-day distraction — surprises inside each gift.',
+    liveUrl: 'https://konyx-group.github.io/box-a-game/',
+    repoUrl: 'https://github.com/konyx-group/box-a-game',
+    tags: ['HTML', 'CSS', 'JavaScript'],
+    image: PLAY_SECRET_BOX_IMAGE_URL,
+  },
+  {
+    num: '03',
+    title: 'Love Number Guesser',
+    description:
+      'Pick a range, choose a difficulty, and guess the secret number in as few tries as you can.',
+    liveUrl: 'https://konyx-group.github.io/random-number/',
+    repoUrl: 'https://github.com/konyx-group/random-number',
+    tags: ['HTML', 'CSS', 'JavaScript'],
+    image: PLAY_RANDOM_NUMBER_IMAGE_URL,
+  },
+  {
+    num: '04',
+    title: 'Do You Love Me?',
+    description:
+      'A cheeky yes/no UI experiment — the "No" button has a mind of its own.',
+    liveUrl: 'https://konyx-group.github.io/funny-game/',
+    repoUrl: 'https://github.com/konyx-group/funny-game',
+    tags: ['HTML', 'CSS', 'JavaScript'],
+    image: PLAY_FUNNY_GAME_IMAGE_URL,
+  },
+]
 
 // ---- Education ----
 export type EducationItem = {
