@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useActiveSection } from '@/hooks/useActiveSection'
 import { useScrollVisibility } from '@/hooks/useScrollVisibility'
 import { cn } from '@/lib/utils'
+import { scrollToSection } from '@/lib/scroll'
 import { EMAIL_LINK, GITHUB_URL, LINKEDIN_URL, SECTIONS } from '@/lib/constants'
 
 const navItems = SECTIONS
@@ -17,12 +18,9 @@ export function Navigation() {
   const isVisible = useScrollVisibility()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-      setMobileMenuOpen(false)
-    }
+  const handleNav = (sectionId: string) => {
+    scrollToSection(sectionId)
+    setMobileMenuOpen(false)
   }
 
   return (
@@ -47,7 +45,7 @@ export function Navigation() {
                 {navItems.map((item) => (
                   <button
                     key={item.id}
-                    onClick={() => scrollToSection(item.id)}
+                    onClick={() => handleNav(item.id)}
                     className={cn(
                       'w-full text-left px-5 py-3 text-sm text-white transition-colors duration-200',
                       'hover:bg-white/5',
@@ -113,7 +111,7 @@ export function Navigation() {
           {navItems.map((item) => (
             <button
               key={item.id}
-              onClick={() => scrollToSection(item.id)}
+              onClick={() => handleNav(item.id)}
               className={cn(
                 'text-sm text-white mix-blend-difference transition-all duration-300 relative py-1',
                 'hover:opacity-60',

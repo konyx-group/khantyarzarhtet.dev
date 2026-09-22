@@ -1,22 +1,28 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import {
-  UCSY_IMAGE_URL,
-  MST_IMAGE_URL,
-  OJT_IMAGE_URL,
-} from '@/lib/constants'
+  CERTIFICATIONS,
+  EDUCATION,
+  type Certification,
+} from '@/lib/data'
 
 const fadeInUp = {
   initial: { opacity: 0, y: 40 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, margin: '-100px' },
-  transition: { duration: 0.8, ease: 'easeOut' }
+  transition: { duration: 0.8, ease: 'easeOut' },
 }
 
 export function Education() {
+  const [openCert, setOpenCert] = useState<string | null>(null)
+
+  const toggleCert = (cert: Certification) => {
+    setOpenCert((current) => (current === cert.title ? null : cert.title))
+  }
+
   return (
     <section id="education" className="section-padding bg-brand-surface">
       <div className="max-w-7xl mx-auto">
-        {/* Section Label */}
         <motion.div {...fadeInUp} className="mb-12 flex items-center gap-4">
           <span className="inline-block px-3 py-1 text-xs font-medium tracking-widest uppercase text-white bg-white/10 backdrop-blur-sm border border-white/20 rounded-full">
             Background
@@ -24,110 +30,115 @@ export function Education() {
           <div className="flex-1 h-px bg-gray-600" />
         </motion.div>
 
-        {/* Section Title - smaller */}
-        <motion.h2
-          {...fadeInUp}
-          className="font-display text-4xl sm:text-5xl md:text-6xl leading-none tracking-tight mb-12 lg:mb-16"
-        >
-          EDUCATION
-        </motion.h2>
+        <div className="mb-12 lg:mb-16 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+          <motion.h2
+            {...fadeInUp}
+            className="font-display text-4xl sm:text-5xl md:text-6xl leading-none tracking-tight text-white"
+          >
+            EDUCATION
+          </motion.h2>
+          <motion.p
+            {...fadeInUp}
+            transition={{ ...fadeInUp.transition, delay: 0.1 }}
+            className="text-sm lg:text-base text-white/50 leading-relaxed max-w-md lg:text-right"
+          >
+            Studies, training, and credentials that shaped how I build software.
+          </motion.p>
+        </div>
 
-        {/* Education Items */}
-        <div className="space-y-16 lg:space-y-20">
-          {/* UCSY */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24">
-            <motion.div {...fadeInUp}>
-              <img
-                src={UCSY_IMAGE_URL}
-                alt="University of Computer Studies, Yangon"
-                loading="lazy"
-                className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-700"
-              />
-              <p className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
-                UNIVERSITY OF COMPUTER STUDIES, YANGON (UCSY)
-              </p>
-            </motion.div>
-
-            <motion.div
-              {...fadeInUp}
-              transition={{ ...fadeInUp.transition, delay: 0.2 }}
-              className="flex items-center"
+        <div className="border-t border-white/10 mb-16 lg:mb-24">
+          {EDUCATION.map((item, index) => (
+            <motion.article
+              key={item.num}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.08 }}
+              className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 py-8 md:py-10 border-b border-white/10"
             >
-              <div>
-                <h3 className="text-xl lg:text-2xl font-light text-white mb-4">
-                  Computer Science
-                </h3>
-                <p className="text-gray-400 leading-relaxed mb-4 text-sm lg:text-base">
-                  My journey in computer science began here, driven by a passion for practical engineering. Foundation in programming, algorithms, and software development.
-                </p>
-                <p className="text-sm text-gray-500">Yangon, Myanmar</p>
+              <div className="md:col-span-2 flex items-baseline gap-3">
+                <span className="font-display text-2xl text-white/30">
+                  {item.num}
+                </span>
+                <span className="text-xs tracking-widest uppercase text-gray-500 md:hidden">
+                  {item.period}
+                </span>
               </div>
-            </motion.div>
-          </div>
-
-          {/* MST College */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24">
-            <motion.div
-              {...fadeInUp}
-              className="flex items-center lg:order-2"
-            >
-              <div>
-                <h3 className="text-xl lg:text-2xl font-light text-white mb-4">
-                  ITPEC — Fundamental Information Technology Engineer (FE)
+              <div className="md:col-span-6">
+                <h3 className="text-lg md:text-xl font-light text-white mb-1">
+                  {item.title}
                 </h3>
-                <p className="text-gray-400 leading-relaxed mb-4 text-sm lg:text-base">
-                  Studied Japan's ITPEC programs at MST College and proudly passed the Fundamental Information Technology Engineer (FE) examination in April 2025.
-                </p>
-                <p className="text-sm text-gray-500">April 2025</p>
+                <p className="text-sm text-gray-400">{item.school}</p>
+                <p className="text-xs text-gray-600 mt-1">{item.location}</p>
               </div>
-            </motion.div>
-
-            <motion.div
-              {...fadeInUp}
-              transition={{ ...fadeInUp.transition, delay: 0.2 }}
-              className="lg:order-1"
-            >
-              <img
-                src={MST_IMAGE_URL}
-                alt="Books and education"
-                loading="lazy"
-                className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-700"
-              />
-              <p className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
-                MST COLLEGE / MYANMAR
-              </p>
-            </motion.div>
-          </div>
-
-          {/* OJT Experience */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24">
-            <motion.div {...fadeInUp}>
-              <img
-                src={OJT_IMAGE_URL}
-                alt="Laptop with code"
-                loading="lazy"
-                className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-700"
-              />
-              <p className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
-                ON-THE-JOB TRAINING
-              </p>
-            </motion.div>
-
-            <motion.div
-              {...fadeInUp}
-              transition={{ ...fadeInUp.transition, delay: 0.2 }}
-              className="flex items-center"
-            >
-              <div>
-                <h3 className="text-xl lg:text-2xl font-light text-white mb-4">
-                  OJT — Employee Management System
-                </h3>
-                <p className="text-gray-400 leading-relaxed mb-4 text-sm lg:text-base">
-                  Crafted an Employee Management System with pure PHP during my On-the-Job Training, focused on solving real-world problems and building practical engineering skills.
+              <div className="md:col-span-4">
+                <p className="hidden md:block text-xs text-gray-500 tracking-widest uppercase mb-3">
+                  {item.period}
                 </p>
-                <p className="text-sm text-gray-500">2025</p>
+                <p className="text-sm text-gray-400 leading-relaxed">
+                  {item.body}
+                </p>
               </div>
-            </motion.div>
+            </motion.article>
+          ))}
+        </div>
+
+        <div id="certifications">
+          <motion.h3
+            {...fadeInUp}
+            className="font-display text-3xl sm:text-4xl md:text-5xl leading-none tracking-tight text-white mb-8 lg:mb-10"
+          >
+            CERTIFICATIONS
+          </motion.h3>
+
+          <div className="border-t border-white/10">
+            {CERTIFICATIONS.map((cert, index) => {
+              const isOpen = openCert === cert.title
+              return (
+                <motion.div
+                  key={cert.title}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.45, delay: index * 0.05 }}
+                  className="border-b border-white/10"
+                >
+                  <button
+                    type="button"
+                    onClick={() => toggleCert(cert)}
+                    aria-expanded={isOpen}
+                    className="w-full text-left py-5 md:py-6 grid grid-cols-[4.5rem_1fr_auto] sm:grid-cols-[5.5rem_1fr_auto] gap-4 items-baseline group"
+                  >
+                    <span className="text-xs tracking-widest uppercase text-gray-500 group-hover:text-gray-400 transition-colors">
+                      {cert.year}
+                    </span>
+                    <span>
+                      <span className="block text-sm md:text-base text-white/80 group-hover:text-white transition-colors">
+                        {cert.title}
+                      </span>
+                      <span className="block text-xs text-gray-500 mt-1">
+                        {cert.issuer}
+                      </span>
+                    </span>
+                    <span
+                      className="text-xs text-gray-600 group-hover:text-gray-400 transition-colors"
+                      aria-hidden="true"
+                    >
+                      {isOpen ? '−' : '+'}
+                    </span>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-300 ease-out ${
+                      isOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
+                    }`}
+                  >
+                    <p className="pb-6 pr-8 sm:pl-[5.5rem] text-sm text-gray-400 leading-relaxed max-w-3xl">
+                      {cert.description}
+                    </p>
+                  </div>
+                </motion.div>
+              )
+            })}
           </div>
         </div>
       </div>

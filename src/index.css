@@ -49,7 +49,9 @@
   }
 
   html {
-    scroll-behavior: smooth;
+    /* Smooth scrolling is driven imperatively via requestAnimationFrame in
+       Navigation.scrollToSection, so we keep CSS scroll-behavior off to avoid
+       conflicts (CSS smooth + JS per-frame scrollTo would fight each other). */
   }
 
   body {
@@ -158,4 +160,43 @@ section[id] {
 
 .img-editorial:hover {
   filter: grayscale(0%);
+}
+
+/* Hero solar system — revolve with baked-in counter-rotate so labels stay horizontal */
+.hero-orbit-ring {
+  container-type: size;
+}
+
+@keyframes hero-planet-revolve {
+  from {
+    transform: rotate(var(--orbit-start, 0deg)) translateY(-50cqh)
+      rotate(calc(0deg - var(--orbit-start, 0deg)));
+  }
+  to {
+    transform: rotate(calc(var(--orbit-start, 0deg) + 360deg)) translateY(-50cqh)
+      rotate(calc(0deg - var(--orbit-start, 0deg) - 360deg));
+  }
+}
+
+.hero-planet-revolve {
+  width: 0;
+  height: 0;
+  animation: hero-planet-revolve var(--orbit-dur, 20s) linear infinite;
+}
+
+.hero-planet-revolve:has(.hero-planet:hover) {
+  animation-play-state: paused;
+}
+
+.hero-planet-label {
+  writing-mode: horizontal-tb;
+  text-orientation: mixed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-planet-revolve {
+    animation: none;
+    transform: rotate(var(--orbit-start, 0deg)) translateY(-50cqh)
+      rotate(calc(0deg - var(--orbit-start, 0deg)));
+  }
 }

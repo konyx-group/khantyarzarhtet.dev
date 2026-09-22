@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type CSSProperties } from 'react'
 import { motion } from 'framer-motion'
-import { HERO_IMAGE_URL, RESUME_URL } from '@/lib/constants'
+import { HERO_IMAGE_URL, HERO_PROFILE_URL, RESUME_URL, FULL_NAME } from '@/lib/constants'
 import { ROLES } from '@/lib/data'
+import { HERO_ORBIT_RINGS } from '@/components/HeroOrbitLogos'
+import { scrollToSection } from '@/lib/scroll'
 
 function useTypewriter(words: string[], typeSpeed = 80, deleteSpeed = 40, pauseTime = 1600) {
   const [wordIndex, setWordIndex] = useState(0)
@@ -13,10 +15,8 @@ function useTypewriter(words: string[], typeSpeed = 80, deleteSpeed = 40, pauseT
     let timeout: ReturnType<typeof setTimeout>
 
     if (!deleting && text === current) {
-      // Pause at full word
       timeout = setTimeout(() => setDeleting(true), pauseTime)
     } else if (deleting && text === '') {
-      // Move to next word
       setDeleting(false)
       setWordIndex((prev) => (prev + 1) % words.length)
     } else {
@@ -36,68 +36,96 @@ function useTypewriter(words: string[], typeSpeed = 80, deleteSpeed = 40, pauseT
   return text
 }
 
+const easeOut = [0.22, 1, 0.36, 1] as const
+
+const textContainer = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.14, delayChildren: 0.2 },
+  },
+}
+
+const textItem = {
+  hidden: { opacity: 0, y: 28 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.85, ease: easeOut },
+  },
+}
+
 export function Hero() {
   const typedRole = useTypewriter(ROLES)
 
   return (
     <section className="relative h-screen w-full overflow-hidden">
-      {/* Background Image - Responsive */}
-      <div className="absolute inset-0 w-full h-full">
+      {/* Background Image */}
+      <motion.div
+        className="absolute inset-0 w-full h-full"
+        initial={{ opacity: 0, scale: 1.04 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.4, ease: easeOut }}
+      >
         <img
           src={HERO_IMAGE_URL}
-          alt="Developer workspace with code on screen"
+          alt=""
+          aria-hidden="true"
           className="w-full h-full object-cover object-center"
         />
-        {/* Gradient overlay for better text readability and blur */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70 backdrop-blur-none" />
-      </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-black/40" />
+      </motion.div>
 
       {/* Content */}
       <div className="relative z-10 h-full flex items-end md:items-center pb-24 md:pb-0 px-6 sm:px-8 md:px-12 lg:px-16">
-        <div className="w-full max-w-3xl">
+        <div className="w-full max-w-7xl mx-auto flex flex-col md:flex-row md:items-center gap-10 md:gap-12 lg:gap-20">
+          {/* Text — staggered entrance */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: 'easeOut' }}
+            className="flex-1 min-w-0"
+            variants={textContainer}
+            initial="hidden"
+            animate="show"
           >
-            {/* Typing badge */}
-            <span className="inline-block mb-5 px-3 py-1 text-xs sm:text-sm font-medium tracking-widest uppercase text-white/90 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full">
+            <motion.span
+              variants={textItem}
+              className="inline-block mb-5 px-3 py-1 text-xs sm:text-sm font-medium tracking-widest uppercase text-white/90 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full"
+            >
               {typedRole}
               <span className="ml-1 inline-block w-[2px] h-[0.9em] bg-white/80 align-middle animate-pulse" />
-            </span>
+            </motion.span>
 
-            {/* Name - smaller and cleaner */}
-            <h1 className="font-display leading-none tracking-tight text-5xl sm:text-6xl md:text-7xl lg:text-8xl">
+            <motion.h1
+              variants={textItem}
+              className="font-display leading-none tracking-tight text-5xl sm:text-6xl md:text-7xl lg:text-8xl"
+            >
               <span className="block text-white">KHANT YAR ZAR</span>
               <span className="block text-white/90">HTET</span>
-            </h1>
+            </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4, duration: 0.7 }}
+              variants={textItem}
               className="mt-6 text-sm sm:text-base text-white/80 max-w-md leading-relaxed"
             >
-              Full stack developer focused on building fast, accessible, and human-centered mobile and web applications. Currently shipping Java, JavaScript, TypeScript, React, ReactNative, PHP, Laravel and Node.js products.
+              "Building Scalable Solutions for Mobile & Web." <br />
+              I am a Full-Stack Developer specializing in seamless user experiences and robust backend architectures. 
+              I turn complex problems into fast, reliable, and human-centered products.
             </motion.p>
 
-            {/* Resume Button */}
             <motion.a
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.6, ease: 'easeOut' }}
+              variants={textItem}
               href={RESUME_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-8 inline-flex items-center gap-2 px-6 py-3 text-sm font-medium tracking-widest uppercase text-white bg-white/10 backdrop-blur-sm border border-white/20 rounded-full hover:bg-white/20 hover:border-white/40 transition-all duration-300"
             >
-              {/* Eye / View Icon */}
               <svg
                 className="w-4 h-4"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
                 viewBox="0 0 24 24"
+                aria-hidden="true"
               >
                 <path
                   strokeLinecap="round"
@@ -112,6 +140,81 @@ export function Hero() {
               </svg>
               Show Resume
             </motion.a>
+          </motion.div>
+
+          {/* Profile as the sun — 3 orbit rings (2 · 2 · 3 logos) */}
+          <motion.div
+            className="shrink-0 self-center md:self-auto md:ml-auto"
+            initial={{ opacity: 0, scale: 0.88, x: 24 }}
+            animate={{ opacity: 1, scale: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.45, ease: easeOut }}
+          >
+            <div className="-translate-x-3 -translate-y-4 sm:-translate-x-5 sm:-translate-y-6 md:-translate-x-8 md:-translate-y-10 lg:-translate-x-12 lg:-translate-y-14">
+              <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[28rem] lg:h-[28rem]">
+                {/* Orbit path rings */}
+                {HERO_ORBIT_RINGS.map((ring) => (
+                  <div
+                    key={`path-${ring.orbit}`}
+                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/15 pointer-events-none"
+                    style={{ width: `${ring.orbit}%`, height: `${ring.orbit}%` }}
+                    aria-hidden="true"
+                  />
+                ))}
+
+                {/* One spinning track per ring; multiple logos share it */}
+                {HERO_ORBIT_RINGS.map((ring) => (
+                  <div
+                    key={`ring-${ring.orbit}`}
+                    className="hero-orbit-ring absolute left-1/2 top-1/2 pointer-events-none"
+                    style={{
+                      width: `${ring.orbit}%`,
+                      height: `${ring.orbit}%`,
+                      transform: 'translate(-50%, -50%)',
+                    }}
+                  >
+                    {ring.logos.map(({ name, Icon, color, start }) => (
+                      <div
+                        key={name}
+                        className="hero-planet-revolve absolute left-1/2 top-1/2 z-20"
+                        style={
+                          {
+                            '--orbit-dur': `${ring.duration}s`,
+                            '--orbit-start': `${start}deg`,
+                            animationDirection: ring.reverse ? 'reverse' : 'normal',
+                          } as CSSProperties
+                        }
+                      >
+                        <div className="hero-planet group relative flex h-9 w-9 sm:h-10 sm:w-10 md:h-11 md:w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-black/75 border border-white/15 backdrop-blur-sm shadow-lg shadow-black/50 pointer-events-auto">
+                          <Icon
+                            color={color}
+                            className="h-4 w-4 sm:h-5 sm:w-5 md:h-[1.35rem] md:w-[1.35rem]"
+                          />
+                          <span className="hero-planet-label pointer-events-none absolute bottom-full left-1/2 mb-2 z-30 -translate-x-1/2 whitespace-nowrap rounded-md bg-black/90 px-2 py-1 text-[10px] sm:text-xs font-medium tracking-wide text-white opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100">
+                            {name}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ))}
+
+                {/* Sun — click portrait → About */}
+                <button
+                  type="button"
+                  onClick={() => scrollToSection('about')}
+                  aria-label="Go to About section"
+                  className="absolute left-1/2 top-1/2 z-10 w-[48%] h-[48%] -translate-x-1/2 -translate-y-1/2 rounded-full cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 transition-transform duration-300 hover:scale-[1.03]"
+                >
+                  <img
+                    src={HERO_PROFILE_URL}
+                    alt={FULL_NAME}
+                    width={288}
+                    height={288}
+                    className="h-full w-full rounded-full object-cover object-center ring-1 ring-white/25 shadow-[0_0_60px_-12px_rgba(255,255,255,0.15)]"
+                  />
+                </button>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>
