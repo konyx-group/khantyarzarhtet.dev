@@ -48,8 +48,8 @@ export function Hero() {
           alt="Developer workspace with code on screen"
           className="w-full h-full object-cover object-center"
         />
-        {/* Gradient overlay for better text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
+        {/* Gradient overlay for better text readability and blur */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70 backdrop-blur-none" />
       </div>
 
       {/* Content */}
