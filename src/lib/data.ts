@@ -19,17 +19,65 @@ export const ROLES = [
   'UI/UX Enthusiast',
 ]
 
-// ---- Skills ----
-export const SKILLS = [
-  'PHP & Laravel',
-  'React.js',
-  'React Native',
-  'JavaScript / HTML / CSS',
-  'Java & JavaFX',
-  'MySQL / Relational Databases',
-  'Clean UI/UX Design',
-  'System Design & Architecture',
+// ---- Skills (grouped for Skills section) ----
+export type SkillGroup = {
+  num: string
+  label: string
+  items: string[]
+}
+
+export const SKILL_GROUPS: SkillGroup[] = [
+  {
+    num: '01',
+    label: 'Backend',
+    items: [
+      'PHP',
+      'Laravel',
+      'MySQL',
+      'REST APIs',
+      'System Design',
+      'Authentication',
+    ],
+  },
+  {
+    num: '02',
+    label: 'Frontend',
+    items: [
+      'React.js',
+      'TypeScript',
+      'JavaScript',
+      'HTML / CSS',
+      'Tailwind CSS',
+      'Vite',
+    ],
+  },
+  {
+    num: '03',
+    label: 'Mobile',
+    items: [
+      'React Native',
+      'Firebase',
+      'Cross-Platform UI',
+      'Push Notifications',
+      'App Navigation',
+    ],
+  },
+  {
+    num: '04',
+    label: 'Tools & Craft',
+    items: [
+      'Java / JavaFX',
+      'Git & GitHub',
+      'Clean Architecture',
+      'UI / UX Design',
+      'OOP',
+      'Problem Solving',
+    ],
+  },
 ]
+
+/** Flat list kept for any legacy consumers */
+export const SKILLS = SKILL_GROUPS.flatMap((g) => g.items)
 
 // ---- Stats ----
 export const STATS = [
