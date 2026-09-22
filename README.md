@@ -1,6 +1,6 @@
-# KONYX Portfolio
+# KONYX Developer Portfolio
 
-quero importar um projeto do github
+Developer portfolio website.
 
 ## Build
 
