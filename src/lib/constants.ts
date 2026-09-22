@@ -14,12 +14,12 @@ export const FULL_NAME = 'Khant Yar Zar Htet'
 export const EMAIL = 'kyzhtet@gmail.com'
 export const EMAIL_LINK = `mailto:${EMAIL}`
 
-export const GITHUB_USERNAME = 'khantyarzarhtet'
+export const GITHUB_USERNAME = 'konyx-group'
 export const GITHUB_URL = `https://github.com/${GITHUB_USERNAME}`
 export const GITHUB_API_URL = `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=6`
 
 export const LINKEDIN_URL = 'https://linkedin.com/in/khantyarzarhtet'
-export const TELEGRAM_URL = 'https://t.me/KYZH8'
+export const TELEGRAM_URL = 'https://t.me/kony_x'
 
 // ---- Location ----
 export const LOCATION = 'Yangon, Myanmar'
@@ -28,8 +28,6 @@ export const LOCATION = 'Yangon, Myanmar'
 export const PLACEHOLDER_LINK = '#'
 
 // ---- Section meta (navigation + section anchors) ----
-// Note: `id` တွေက section anchor scroll နဲ့ဆိုင်လို့
-// ဒီကနေပဲ nav + section တညီတညီ ဖြစ်နေအောင် ထိန်းထားတယ်။
 export const SECTIONS = [
   { id: 'about', label: 'About' },
   { id: 'skills', label: 'Skills' },
