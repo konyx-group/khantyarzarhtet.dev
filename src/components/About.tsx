@@ -22,7 +22,7 @@ const STORIES = [
   {
     num: '03',
     label: 'Journey',
-    body: 'After shipping in a fast-paced mobile environment, I moved into a full-time PHP Laravel role. Today I use that front-end intuition to architect robust back-end systems.',
+    body: 'After shipping in a fast-paced mobile environment, I moved into a full-time PHP Laravel role. Today I use that front-end intuition to architect robust back-end systems — and I run KONYX as my solo studio for experiments.',
   },
 ] as const
 
@@ -50,7 +50,10 @@ export function About() {
               <img
                 src={HERO_PROFILE_URL}
                 alt={FULL_NAME}
-                loading="lazy"
+                width={640}
+                height={800}
+                decoding="async"
+                fetchPriority="low"
                 className="aspect-[4/5] w-full object-cover object-[center_20%]"
               />
             </div>
