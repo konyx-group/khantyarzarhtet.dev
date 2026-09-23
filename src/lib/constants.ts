@@ -18,6 +18,9 @@ export const GITHUB_USERNAME = 'konyx-group'
 export const GITHUB_URL = `https://github.com/${GITHUB_USERNAME}`
 export const GITHUB_API_URL = `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=6`
 
+export const KONYX_NAME = 'KONYX-GROUP'
+export const KONYX_TAGLINE = 'A solo coding collective & personal brand'
+
 export const LINKEDIN_URL = 'https://linkedin.com/in/khantyarzarhtet'
 export const TELEGRAM_URL = 'https://t.me/kony_x'
 
@@ -33,7 +36,7 @@ export const SECTIONS = [
   { id: 'education', label: 'Education' },
   { id: 'skills', label: 'Skills' },
   { id: 'work', label: 'Work' },
-  { id: 'play', label: 'Play' },
+  { id: 'konyx', label: 'KONYX' },
   // { id: 'writing', label: 'Writing' },
   // { id: 'speaking', label: 'Speaking' },
   { id: 'contact', label: 'Contact'}

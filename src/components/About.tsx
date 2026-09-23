@@ -50,7 +50,10 @@ export function About() {
               <img
                 src={HERO_PROFILE_URL}
                 alt={FULL_NAME}
-                loading="lazy"
+                width={640}
+                height={800}
+                decoding="async"
+                fetchPriority="low"
                 className="aspect-[4/5] w-full object-cover object-[center_20%]"
               />
             </div>

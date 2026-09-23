@@ -1,6 +1,12 @@
 import { motion } from 'framer-motion'
 import { PLAY_PROJECTS } from '@/lib/data'
-import { GITHUB_URL } from '@/lib/constants'
+import {
+  FULL_NAME,
+  GITHUB_URL,
+  KONYX_NAME,
+  KONYX_TAGLINE,
+  TELEGRAM_URL,
+} from '@/lib/constants'
 
 const fadeInUp = {
   initial: { opacity: 0, y: 40 },
@@ -11,31 +17,80 @@ const fadeInUp = {
 
 export function Play() {
   return (
-    <section id="play" className="section-padding bg-brand-surface">
+    <section id="konyx" className="section-padding bg-brand-surface">
       <div className="max-w-7xl mx-auto">
         <motion.div {...fadeInUp} className="mb-12 flex items-center gap-4">
           <span className="inline-block px-3 py-1 text-xs font-medium tracking-widest uppercase text-white bg-white/10 backdrop-blur-sm border border-white/20 rounded-full">
-            Side Experiments
+            Studio
           </span>
           <div className="flex-1 h-px bg-gray-600" />
         </motion.div>
 
-        <div className="mb-12 lg:mb-16 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-          <motion.h2
+        <div className="mb-12 lg:mb-16 grid grid-cols-1 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] gap-10 lg:gap-16 items-end">
+          <div>
+            <motion.h2
+              {...fadeInUp}
+              className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-none tracking-tight text-white"
+            >
+              {KONYX_NAME}
+            </motion.h2>
+            <motion.p
+              {...fadeInUp}
+              transition={{ ...fadeInUp.transition, delay: 0.08 }}
+              className="mt-4 text-xs tracking-widest uppercase text-white/40"
+            >
+              {KONYX_TAGLINE}
+            </motion.p>
+          </div>
+
+          <motion.div
             {...fadeInUp}
-            className="font-display text-4xl sm:text-5xl md:text-6xl leading-none tracking-tight text-white"
+            transition={{ ...fadeInUp.transition, delay: 0.12 }}
+            className="lg:pb-1"
           >
-            PLAY
-          </motion.h2>
-          <motion.p
-            {...fadeInUp}
-            transition={{ ...fadeInUp.transition, delay: 0.1 }}
-            className="text-sm lg:text-base text-white/50 leading-relaxed max-w-md lg:text-right"
-          >
+            <p className="text-sm lg:text-base text-white/60 leading-relaxed max-w-md lg:ml-auto lg:text-right">
+              I founded {KONYX_NAME} as my own coding collective — one person,
+              one brand — to ship small experiments, games, and ideas under a
+              name that feels like a studio. Founded by {FULL_NAME}.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-5 text-xs tracking-widest uppercase lg:justify-end">
+              <a
+                href={GITHUB_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/80 hover:text-white transition-colors"
+              >
+                GitHub ↗
+              </a>
+              <a
+                href={TELEGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-500 hover:text-gray-300 transition-colors"
+              >
+                Telegram ↗
+              </a>
+            </div>
+          </motion.div>
+        </div>
+
+        <motion.div
+          {...fadeInUp}
+          className="mb-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 border-t border-white/10 pt-8"
+        >
+          <div>
+            <p className="text-xs tracking-widest uppercase text-gray-500 mb-2">
+              Experiments
+            </p>
+            <h3 className="font-display text-2xl sm:text-3xl leading-none tracking-tight text-white">
+              PLAY
+            </h3>
+          </div>
+          <p className="text-sm text-white/50 leading-relaxed max-w-md sm:text-right">
             Small HTML / JS games hosted on GitHub Pages — built for fun, not
             for clients.
-          </motion.p>
-        </div>
+          </p>
+        </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8">
           {PLAY_PROJECTS.map((project, index) => (
@@ -110,21 +165,6 @@ export function Play() {
             </motion.article>
           ))}
         </div>
-
-        <motion.p
-          {...fadeInUp}
-          className="mt-10 text-xs text-gray-600 tracking-widest uppercase"
-        >
-          More on{' '}
-          <a
-            href={GITHUB_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-400 hover:text-white transition-colors"
-          >
-            github.com/konyx-group
-          </a>
-        </motion.p>
       </div>
     </section>
   )
