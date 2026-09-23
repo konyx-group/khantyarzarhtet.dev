@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion'
 import { PLAY_PROJECTS } from '@/lib/data'
 import {
-  FULL_NAME,
   GITHUB_URL,
   KONYX_NAME,
   KONYX_TAGLINE,
@@ -49,9 +48,8 @@ export function Play() {
             className="lg:pb-1"
           >
             <p className="text-sm lg:text-base text-white/60 leading-relaxed max-w-md lg:ml-auto lg:text-right">
-              I founded {KONYX_NAME} as my own coding collective — one person,
-              one brand — to ship small experiments, games, and ideas under a
-              name that feels like a studio. Founded by {FULL_NAME}.
+              A solo coding collective and personal brand I founded to ship
+              small experiments, games, and ideas — one person, one studio.
             </p>
             <div className="mt-6 flex flex-wrap gap-5 text-xs tracking-widest uppercase lg:justify-end">
               <a

@@ -1,6 +1,6 @@
 import { useEffect, useState, type CSSProperties } from 'react'
 import { motion } from 'framer-motion'
-import { HERO_IMAGE_URL, HERO_PROFILE_URL, RESUME_URL, FULL_NAME } from '@/lib/constants'
+import { HERO_IMAGE_URL, HERO_PROFILE_URL, RESUME_URL, FULL_NAME, KONYX_NAME } from '@/lib/constants'
 import { ROLES } from '@/lib/data'
 import { HERO_ORBIT_RINGS } from '@/components/HeroOrbitLogos'
 import { scrollToSection } from '@/lib/scroll'
@@ -36,6 +36,36 @@ function useTypewriter(words: string[], typeSpeed = 80, deleteSpeed = 40, pauseT
   return text
 }
 
+const FOUNDER_LINE = `Founder of ${KONYX_NAME}`
+
+function useHoverTypewriter(full: string, active: boolean, typeSpeed = 36) {
+  const [text, setText] = useState('')
+
+  useEffect(() => {
+    if (!active) {
+      setText('')
+      return
+    }
+
+    setText('')
+    let i = 0
+    const timeout = { id: 0 as ReturnType<typeof setTimeout> }
+
+    const tick = () => {
+      i += 1
+      setText(full.slice(0, i))
+      if (i < full.length) {
+        timeout.id = setTimeout(tick, typeSpeed)
+      }
+    }
+
+    timeout.id = setTimeout(tick, 80)
+    return () => clearTimeout(timeout.id)
+  }, [active, full, typeSpeed])
+
+  return text
+}
+
 const easeOut = [0.22, 1, 0.36, 1] as const
 
 const textContainer = {
@@ -57,6 +87,8 @@ const textItem = {
 
 export function Hero() {
   const typedRole = useTypewriter(ROLES)
+  const [portraitHover, setPortraitHover] = useState(false)
+  const founderTyped = useHoverTypewriter(FOUNDER_LINE, portraitHover)
 
   return (
     <section className="relative h-screen w-full overflow-hidden">
@@ -198,11 +230,15 @@ export function Hero() {
                   </div>
                 ))}
 
-                {/* Sun — click portrait → About */}
+                {/* Sun — click portrait → Konyx */}
                 <button
                   type="button"
-                  onClick={() => scrollToSection('about')}
-                  aria-label="Go to About section"
+                  onClick={() => scrollToSection('konyx')}
+                  onMouseEnter={() => setPortraitHover(true)}
+                  onMouseLeave={() => setPortraitHover(false)}
+                  onFocus={() => setPortraitHover(true)}
+                  onBlur={() => setPortraitHover(false)}
+                  aria-label={`${FULL_NAME}, founder of ${KONYX_NAME}. Go to Konyx section`}
                   className="absolute left-1/2 top-1/2 z-10 w-[48%] h-[48%] -translate-x-1/2 -translate-y-1/2 rounded-full cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 transition-transform duration-300 hover:scale-[1.03]"
                 >
                   <img
@@ -213,6 +249,38 @@ export function Hero() {
                     className="h-full w-full rounded-full object-cover object-center ring-1 ring-white/25 shadow-[0_0_60px_-12px_rgba(255,255,255,0.15)]"
                   />
                 </button>
+
+                {/* Founder label + leader line (anchored to text so they stay aligned) */}
+                <div
+                  aria-hidden="true"
+                  className={`pointer-events-none absolute z-30 left-[68%] top-[14%] sm:left-[70%] sm:top-[12%] md:left-[72%] md:top-[10%] transition-opacity duration-300 ${
+                    portraitHover ? 'opacity-100' : 'opacity-0'
+                  }`}
+                >
+                  <svg
+                    className="absolute right-full top-[0.55em] -translate-y-1/2 overflow-visible w-16 h-12 sm:w-20 sm:h-14 md:w-24 md:h-16"
+                    viewBox="0 0 96 64"
+                    fill="none"
+                    preserveAspectRatio="none"
+                  >
+                    <line
+                      x1="50"
+                      y1="80"
+                      x2="70"
+                      y2="40"
+                      stroke="rgba(255,255,255,0.55)"
+                      strokeWidth="1.25"
+                      strokeLinecap="round"
+                      vectorEffect="non-scaling-stroke"
+                    />
+                  </svg>
+                  <p className="relative whitespace-nowrap text-[10px] sm:text-xs tracking-widest uppercase text-white/85 min-h-[1.25em]">
+                    {founderTyped}
+                    {portraitHover && founderTyped.length < FOUNDER_LINE.length && (
+                      <span className="ml-0.5 inline-block w-[1px] h-[0.9em] bg-white/80 align-middle animate-pulse" />
+                    )}
+                  </p>
+                </div>
               </div>
             </div>
           </motion.div>

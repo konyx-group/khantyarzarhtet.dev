@@ -22,7 +22,7 @@ const STORIES = [
   {
     num: '03',
     label: 'Journey',
-    body: 'After shipping in a fast-paced mobile environment, I moved into a full-time PHP Laravel role. Today I use that front-end intuition to architect robust back-end systems.',
+    body: 'After shipping in a fast-paced mobile environment, I moved into a full-time PHP Laravel role. Today I use that front-end intuition to architect robust back-end systems — and I run KONYX as my solo studio for experiments.',
   },
 ] as const
 
