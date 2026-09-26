@@ -88,8 +88,8 @@ export const SKILLS = SKILL_GROUPS.flatMap((g) => g.items)
 
 // ---- Stats ----
 export const STATS = [
-  { value: '2+', label: 'Years Coding' },
-  { value: '15+', label: 'Projects Shipped' },
+  { value: '4+', label: 'Years Coding' },
+  { value: '20+', label: 'Projects Shipped' },
   { value: '10+', label: 'Mobile Apps Built' },
   { value: '5', label: 'Certifications' },
 ]
