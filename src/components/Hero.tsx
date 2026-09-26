@@ -1,5 +1,5 @@
 import { useEffect, useState, type CSSProperties } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { HERO_IMAGE_URL, HERO_PROFILE_URL, RESUME_URL, FULL_NAME, KONYX_NAME } from '@/lib/constants'
 import { ROLES } from '@/lib/data'
 import { HERO_ORBIT_RINGS } from '@/components/HeroOrbitLogos'
@@ -67,38 +67,41 @@ function useHoverTypewriter(full: string, active: boolean, typeSpeed = 36) {
 }
 
 const easeOut = [0.22, 1, 0.36, 1] as const
+/** Wait for loader overlay to clear a bit, then rise one-by-one. */
+const BASE_DELAY = 0.35
+const STEP = 0.4
 
-const textContainer = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.14, delayChildren: 0.2 },
-  },
+function rise(index: number, reduced: boolean) {
+  return {
+    hidden: { opacity: 0, y: 28 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: reduced ? 0.2 : 0.9,
+        delay: reduced ? 0 : BASE_DELAY + index * STEP,
+        ease: easeOut,
+      },
+    },
+  }
 }
 
-const textItem = {
-  hidden: { opacity: 0, y: 28 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.85, ease: easeOut },
-  },
+type HeroProps = {
+  /** Starts the one-by-one content entrance after the loader has fully left. */
+  animateEntrance?: boolean
 }
 
-export function Hero() {
+export function Hero({ animateEntrance = true }: HeroProps) {
   const typedRole = useTypewriter(ROLES)
   const [portraitHover, setPortraitHover] = useState(false)
   const founderTyped = useHoverTypewriter(FOUNDER_LINE, portraitHover)
+  const shouldReduceMotion = useReducedMotion()
+  const entrance = animateEntrance ? 'show' : 'hidden'
 
   return (
-    <section className="relative h-screen w-full overflow-hidden">
-      {/* Background Image */}
-      <motion.div
-        className="absolute inset-0 w-full h-full"
-        initial={{ opacity: 0, scale: 1.04 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.4, ease: easeOut }}
-      >
+    <section className="relative h-screen w-full overflow-hidden bg-black">
+      {/* Always painted under the loader — never opacity-toggle (that caused the black flash). */}
+      <div className="absolute inset-0 w-full h-full">
         <img
           src={HERO_IMAGE_URL}
           alt=""
@@ -107,37 +110,47 @@ export function Hero() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-black/40" />
-      </motion.div>
+      </div>
 
       {/* Content */}
       <div className="relative z-10 h-full flex items-end md:items-center pb-24 md:pb-0 px-6 sm:px-8 md:px-12 lg:px-16">
         <div className="w-full max-w-7xl mx-auto flex flex-col md:flex-row md:items-center gap-10 md:gap-12 lg:gap-20">
           {/* Text — staggered entrance */}
-          <motion.div
-            className="flex-1 min-w-0"
-            variants={textContainer}
-            initial="hidden"
-            animate="show"
-          >
+          <div className="flex-1 min-w-0">
             <motion.span
-              variants={textItem}
               className="inline-block mb-5 px-3 py-1 text-xs sm:text-sm font-medium tracking-widest uppercase text-white/90 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full"
+              initial="hidden"
+              animate={entrance}
+              variants={rise(0, !!shouldReduceMotion)}
             >
               {typedRole}
               <span className="ml-1 inline-block w-[2px] h-[0.9em] bg-white/80 align-middle animate-pulse" />
             </motion.span>
 
-            <motion.h1
-              variants={textItem}
-              className="font-display leading-none tracking-tight text-5xl sm:text-6xl md:text-7xl lg:text-8xl"
-            >
-              <span className="block text-white">KHANT YAR ZAR</span>
-              <span className="block text-white/90">HTET</span>
-            </motion.h1>
+            <h1 className="font-display leading-none tracking-tight text-5xl sm:text-6xl md:text-7xl lg:text-8xl">
+              <motion.span
+                className="block text-white"
+                initial="hidden"
+                animate={entrance}
+                variants={rise(1, !!shouldReduceMotion)}
+              >
+                KHANT YAR ZAR
+              </motion.span>
+              <motion.span
+                className="block text-white/90"
+                initial="hidden"
+                animate={entrance}
+                variants={rise(2, !!shouldReduceMotion)}
+              >
+                HTET
+              </motion.span>
+            </h1>
 
             <motion.p
-              variants={textItem}
               className="mt-6 text-sm sm:text-base text-white/80 max-w-md leading-relaxed"
+              initial="hidden"
+              animate={entrance}
+              variants={rise(3, !!shouldReduceMotion)}
             >
               "Building Scalable Solutions for Mobile & Web." <br />
               I am a Full-Stack Developer specializing in seamless user experiences and robust backend architectures. 
@@ -145,7 +158,9 @@ export function Hero() {
             </motion.p>
 
             <motion.a
-              variants={textItem}
+              initial="hidden"
+              animate={entrance}
+              variants={rise(4, !!shouldReduceMotion)}
               href={RESUME_URL}
               target="_blank"
               rel="noopener noreferrer"
@@ -172,14 +187,26 @@ export function Hero() {
               </svg>
               Show Resume
             </motion.a>
-          </motion.div>
+          </div>
 
           {/* Profile as the sun — 3 orbit rings (2 · 2 · 3 logos) */}
           <motion.div
             className="shrink-0 self-center md:self-auto md:ml-auto"
-            initial={{ opacity: 0, scale: 0.88, x: 24 }}
-            animate={{ opacity: 1, scale: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.45, ease: easeOut }}
+            initial="hidden"
+            animate={entrance}
+            variants={{
+              hidden: { opacity: 0, y: 32, scale: 0.96 },
+              show: {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                transition: {
+                  duration: shouldReduceMotion ? 0.2 : 1.05,
+                  delay: shouldReduceMotion ? 0 : BASE_DELAY + 5 * STEP,
+                  ease: easeOut,
+                },
+              },
+            }}
           >
             <div className="-translate-x-3 -translate-y-4 sm:-translate-x-5 sm:-translate-y-6 md:-translate-x-8 md:-translate-y-10 lg:-translate-x-12 lg:-translate-y-14">
               <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[28rem] lg:h-[28rem]">
